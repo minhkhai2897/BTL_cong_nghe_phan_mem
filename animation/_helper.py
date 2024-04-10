@@ -1,5 +1,7 @@
 import pygame
 
+SCALE_RATIO = 2
+
 class ImageProcessor:
     @staticmethod
     def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float, angle: float) -> tuple[pygame.surface.Surface]:
