@@ -1,0 +1,2 @@
+STORAGE_PATH = "storage.dat"
+STORAGE_RANKLIST_NUM = 10
