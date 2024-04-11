@@ -4,29 +4,21 @@ SCALE_RATIO = 2
 
 class ImageProcessor:
     @staticmethod
-    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float, angle: float) -> tuple[pygame.surface.Surface]:
+    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:
         new_images = []
         for image in images:
-            new_image = ImageProcessor.process_image(image, flip, scaled, angle)
+            new_image = ImageProcessor.process_image(image, flip, scaled)
             new_images.append(new_image)
         return tuple(new_images)
 
     @staticmethod
-    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float, angle: float) -> pygame.surface.Surface:
+    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:
         new_image = image
         if flip:
             new_image = ImageProcessor.flip(new_image)
         if scaled != 1:
             new_image = ImageProcessor.resize(new_image, scaled)
-        if angle != 0:
-            new_image = ImageProcessor.rotate(new_image, angle)
         return new_image
-
-    @staticmethod
-    def rotate(image: pygame.surface.Surface, angle: float) -> pygame.surface.Surface:
-        new_image = image
-        # khi nào cần sẽ viết hàm này
-        return image
 
     @staticmethod
     def resize(image: pygame.surface.Surface, scaled: float) -> pygame.surface.Surface:

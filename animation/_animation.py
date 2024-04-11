@@ -3,7 +3,7 @@ from abc import ABC
 from ._sprite import SPRITE
 
 class Animation(ABC):
-    def __init__(self, state_list : list[str], position : tuple[float, float], frame_speed: int = 0.1):
+    def __init__(self, state_list : tuple[str], position : tuple[float, float], frame_speed: int = 0.1):
         """ 
         Parameters:
             state_list: Danh sách các trạng thái của đối tượng (list[str])
@@ -25,7 +25,7 @@ class Animation(ABC):
         """ Trả về tên của đối tượng."""
         return self._name
     
-    def _set_state(self, state: str):
+    def set_state(self, state: str):
         """ Thiết lập trạng thái mới. """
         if (state not in self._state_list):
             raise ValueError(f"State {state} is not in the state_list")
@@ -87,6 +87,12 @@ class Animation(ABC):
     
     def set_position(self, position : tuple[float, float]):
         self._current_img_rect.topleft = position
+
+    def get_center(self) -> tuple[float, float]:
+        return self._current_img_rect.center
+    
+    def set_center(self, center : tuple[float, float]):
+        self._current_img_rect.center = center
 
 
     
