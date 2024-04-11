@@ -9,6 +9,14 @@
         "documentation": {}
     },
     {
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
         "label": "animation",
         "kind": 6,
         "isExtraImport": true,
@@ -27,6 +35,22 @@
     },
     {
         "label": "SCREEN_HEIGHT",
+        "importPath": "helper",
+        "description": "helper",
+        "isExtraImport": true,
+        "detail": "helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAP_WIDTH",
+        "importPath": "helper",
+        "description": "helper",
+        "isExtraImport": true,
+        "detail": "helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAP_HEIGHT",
         "importPath": "helper",
         "description": "helper",
         "isExtraImport": true,
@@ -63,7 +87,7 @@
         "kind": 6,
         "importPath": "animation._animation",
         "description": "animation._animation",
-        "peekOfCode": "class Animation:\n    def __init__(self, state_list = list[str], frame_speed: int = 0.1):\n        \"\"\" \n        Parameters:\n            state_list: Danh sách các trạng thái của đối tượng (list[str])\n            frame_speed: Tốc độ chuyển đổi giữa các frame (frame/s)\n        \"\"\"\n        self._state_list = state_list\n        self._current_state = self._state_list[0]\n        self._images = SPRITE.get_images(self._current_state)",
+        "peekOfCode": "class Animation(ABC):\n    def __init__(self, state_list = list[str], frame_speed: int = 0.1):\n        \"\"\" \n        Parameters:\n            state_list: Danh sách các trạng thái của đối tượng (list[str])\n            frame_speed: Tốc độ chuyển đổi giữa các frame (frame/s)\n        \"\"\"\n        self._state_list = state_list\n        self._current_state = self._state_list[0]\n        self._images = SPRITE.get_images(self._current_state)",
         "detail": "animation._animation",
         "documentation": {}
     },
@@ -189,7 +213,7 @@
         "kind": 5,
         "importPath": "helper",
         "description": "helper",
-        "peekOfCode": "SCREEN_WIDTH = 1280\nSCREEN_HEIGHT = 800\nMAX_PALYERS_NUM = 2",
+        "peekOfCode": "SCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nSCALED_SIZE = 32\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
         "detail": "helper",
         "documentation": {}
     },
@@ -198,7 +222,34 @@
         "kind": 5,
         "importPath": "helper",
         "description": "helper",
-        "peekOfCode": "SCREEN_HEIGHT = 800\nMAX_PALYERS_NUM = 2",
+        "peekOfCode": "SCREEN_HEIGHT = 896\nSCALED_SIZE = 32\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
+        "detail": "helper",
+        "documentation": {}
+    },
+    {
+        "label": "SCALED_SIZE",
+        "kind": 5,
+        "importPath": "helper",
+        "description": "helper",
+        "peekOfCode": "SCALED_SIZE = 32\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
+        "detail": "helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAP_WIDTH",
+        "kind": 5,
+        "importPath": "helper",
+        "description": "helper",
+        "peekOfCode": "MAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
+        "detail": "helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAP_HEIGHT",
+        "kind": 5,
+        "importPath": "helper",
+        "description": "helper",
+        "peekOfCode": "MAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
         "detail": "helper",
         "documentation": {}
     },
@@ -234,7 +285,16 @@
         "kind": 2,
         "importPath": "map_test",
         "description": "map_test",
-        "peekOfCode": "def render_map(screen):\n    floor_animation = animation.BackgroundAnimation(\"floor_2\")\n    for i in range(100):\n        for j in range(60):\n            floor_animation.render(screen, (i * floor_animation.get_width(), j * floor_animation.get_height()))",
+        "peekOfCode": "def render_map(screen):\n    floor_animation = animation.BackgroundAnimation(\"floor_2\")\n    for i in range(MAP_WIDTH):\n        for j in range(MAP_HEIGHT):\n            floor_animation.render(screen, (i * floor_animation.get_width(), j * floor_animation.get_height()))",
+        "detail": "map_test",
+        "documentation": {}
+    },
+    {
+        "label": "has_map",
+        "kind": 5,
+        "importPath": "map_test",
+        "description": "map_test",
+        "peekOfCode": "has_map = [[0 for i in range(MAP_WIDTH)] for j in range(MAP_HEIGHT)]\ndef render_map(screen):\n    floor_animation = animation.BackgroundAnimation(\"floor_2\")\n    for i in range(MAP_WIDTH):\n        for j in range(MAP_HEIGHT):\n            floor_animation.render(screen, (i * floor_animation.get_width(), j * floor_animation.get_height()))",
         "detail": "map_test",
         "documentation": {}
     },

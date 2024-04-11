@@ -34,7 +34,7 @@ class Game:
 
         
     def render(self):
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((0, 0, 0))
         
 
 
