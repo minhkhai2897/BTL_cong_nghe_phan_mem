@@ -1,7 +1,8 @@
 import pygame
+from abc import ABC
 from ._sprite import SPRITE
 
-class Animation:
+class Animation(ABC):
     def __init__(self, state_list = list[str], frame_speed: int = 0.1):
         """ 
         Parameters:
@@ -13,6 +14,7 @@ class Animation:
         self._images = SPRITE.get_images(self._current_state)
         self._is_change_state = False
         self._current_img = self._images[0]
+        self._current_img_rect = self._current_img.get_rect()
         self._current_frame = 0  
         self._last_update_time = 0  
         self._frame_speed = frame_speed 
@@ -38,6 +40,14 @@ class Animation:
     def get_height(self) -> int:
         """ Trả về chiều dài của hình ảnh hiện tại."""
         return self._current_img.get_height()
+    
+    def get_rect(self) -> pygame.Rect:
+        """ Trả về hình chữ nhật bao quanh hình ảnh hiện tại (bouding box)."""
+        return self._current_img_rect
+    
+    def check_collision(self, other: 'Animation') -> bool:
+        """ Kiểm tra va chạm với một bouding box khác."""
+        return self._current_img_rect.colliderect(other.get_rect())
 
     def get_current_state(self) -> str:
         """ Trả về tên của trạng thái hiện tại."""
@@ -45,7 +55,8 @@ class Animation:
 
     def render(self, screen: pygame.surface.Surface, position: tuple[float, float]):
         """ Hiển thị hình ảnh hiện tại lên màn hình."""
-        screen.blit(self._current_img, position)
+        self._current_img_rect.topleft = position
+        screen.blit(self._current_img, self._current_img_rect)
 
     def update(self, current_time: int):
         """ Cập nhật hình ảnh hiện tại."""
@@ -54,9 +65,15 @@ class Animation:
             self._is_change_state = False
             self._last_update_time = current_time
         else:
+            SECOND_MS = 1000
             elapsed_time = current_time - self._last_update_time
-            if elapsed_time >= (self._frame_speed * 1000):
+            if elapsed_time >= (self._frame_speed * SECOND_MS):
                 self._last_update_time = current_time
                 self._current_frame = (self._current_frame + 1) % len(self._images)
         self._current_img = self._images[self._current_frame]
 
+    def render_center (self, screen: pygame.surface.Surface, position: tuple[float, float]):
+        """ Hiển thị hình ảnh hiện tại lên màn hình, tâm của hình trùng với vị trí truyền vào."""
+        x = position[0] - self._current_img.get_width() / 2
+        y = position[1] - self._current_img.get_height() / 2
+        self.render(screen, (x, y))

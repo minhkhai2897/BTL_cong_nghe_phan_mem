@@ -1,5 +1,5 @@
 import pygame
-from ._helper import FileReader, ImageProcessor
+from ._helper import FileReader, ImageProcessor, SCALE_RATIO
 
 class SpriteSheet: 
     def __init__(self):
@@ -246,15 +246,31 @@ class SpriteSheet:
         dict_images = self.extract_images_from_files(path)
         for states in self.__characters.values():
             for state in states:
-                dict_images[state + "_right"] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=1, angle=0)
-                dict_images[state + "_left"] = ImageProcessor.process_images(dict_images[state], flip=True, scaled=1, angle=0)
+                dict_images[state + "_right"] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=SCALE_RATIO, angle=0)
+                dict_images[state + "_left"] = ImageProcessor.process_images(dict_images[state], flip=True, scaled=SCALE_RATIO, angle=0)
                 dict_images.pop(state)
         
         for states in self.__weapons.values():
             for state in states:
-                dict_images[state + "_right"] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=1, angle=0)
-                dict_images[state + "_left"] = ImageProcessor.process_images(dict_images[state], flip=True, scaled=1, angle=0)
+                dict_images[state + "_right"] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=SCALE_RATIO, angle=0)
+                dict_images[state + "_left"] = ImageProcessor.process_images(dict_images[state], flip=True, scaled=SCALE_RATIO, angle=0)
                 dict_images.pop(state)
 
+        for states in self.__effects.values():
+            for state in states:
+                dict_images[state] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=SCALE_RATIO, angle=0)
+
+        for states in self.__bullets.values():
+            for state in states:
+                dict_images[state] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=SCALE_RATIO, angle=0)
+
+        for states in self.__items.values():
+            for state in states:
+                dict_images[state] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=SCALE_RATIO, angle=0)
+
+        for states in self.__backgrounds.values():
+            for state in states:
+                dict_images[state] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=SCALE_RATIO, angle=0)
+        
         return dict_images
     
