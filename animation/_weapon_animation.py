@@ -10,15 +10,15 @@ class WeaponAnimation(Animation):
         super().__init__(state_list, position, frame_speed)
         self._name = name
 
-    def set_state(self, state: str):
+    def _set_state(self, state: str):
         """
         States: 
             - left
             - right
         """
-        return super().set_state("weapon_" + self.__name + "_" + state)
+        return super()._set_state("weapon_" + self.__name + "_" + state)
     
-    def get_current_state(self) -> str:
+    def _get_current_state(self) -> str:
         """ 
         Trả về tên của trạng thái hiện tại.
         

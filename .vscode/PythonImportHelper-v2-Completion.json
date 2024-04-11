@@ -195,7 +195,7 @@
         "kind": 6,
         "importPath": "animation._weapon_animation",
         "description": "animation._weapon_animation",
-        "peekOfCode": "class WeaponAnimation(Animation):\n    def __inti__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed = 0.1):\n        \"\"\"\n        ['knife', 'rusty_sword', 'regular_sword', 'red_gem_sword', 'big_hammer', 'hammer', 'baton_with_spikes', 'mace', 'katana', 'saw_sword', 'anime_sword', 'axe', 'machete', 'cleaver', 'duel_sword', 'knight_sword', 'golden_sword', 'lavish_sword', 'red_magic_staff', 'green_magic_staff', 'spear', 'purple_staff', 'thunder_staff', 'bow', 'holy_sword', 'fire_sword', 'ice_sword', 'grass_sword', 'iron_sword']\n        \"\"\"\n        state_list = SPRITE.get_weapons(name)\n        super().__init__(state_list, position, frame_speed)\n        self._name = name\n    def set_state(self, state: str):\n        \"\"\"",
+        "peekOfCode": "class WeaponAnimation(Animation):\n    def __inti__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed = 0.1):\n        \"\"\"\n        ['knife', 'rusty_sword', 'regular_sword', 'red_gem_sword', 'big_hammer', 'hammer', 'baton_with_spikes', 'mace', 'katana', 'saw_sword', 'anime_sword', 'axe', 'machete', 'cleaver', 'duel_sword', 'knight_sword', 'golden_sword', 'lavish_sword', 'red_magic_staff', 'green_magic_staff', 'spear', 'purple_staff', 'thunder_staff', 'bow', 'holy_sword', 'fire_sword', 'ice_sword', 'grass_sword', 'iron_sword']\n        \"\"\"\n        state_list = SPRITE.get_weapons(name)\n        super().__init__(state_list, position, frame_speed)\n        self._name = name\n    def _set_state(self, state: str):\n        \"\"\"",
         "detail": "animation._weapon_animation",
         "documentation": {}
     },
@@ -263,24 +263,6 @@
         "documentation": {}
     },
     {
-        "label": "screen",
-        "kind": 5,
-        "importPath": "huong_dan",
-        "description": "huong_dan",
-        "peekOfCode": "screen = pygame.display.set_mode((1200, 700))\n# Dưới đây là tạo animation cho nhân vật, các thứ khác làm tương tự. (Chỉ cần gõ animaion. là có gợi ý về các loại)\n# Một nhân vật sẽ có nhiều trạng thái, mỗi trạng thái sẽ gồm 1 list các ảnh, và mỗi ảnh sẽ được hiển thị theo thời gian.\nknight_animation = animation.CharacterAnimation(\"knight_m\") # Tạo animation cho knight.\nknight_animation.update(pygame.time.get_ticks()) # Cập nhật animation\nknight_animation.render(screen, position=(100, 100), hp=1, max_hp=1) # Hiển thị animation lên màn hình.\nknight_animation.set_state(\"idle_anim_left\") # chuyển sang trạng thái khác.\nknight_animation.add_effect(animation.EffectAnimation(\"thunder\", frame_speed=0.1, life_span=1)) # Thêm hiệu ứng cho nhân vật.\n# Mỗi nhân vật khi bị tấn công sẽ có các hiệu ứng như chảy máu, cháy lửa, sét đánh, ...\n# Sau khi thêm hiệu ứng thì khi chạy hết life_span sẽ tự động xóa hiệu ứng đó.",
-        "detail": "huong_dan",
-        "documentation": {}
-    },
-    {
-        "label": "knight_animation",
-        "kind": 5,
-        "importPath": "huong_dan",
-        "description": "huong_dan",
-        "peekOfCode": "knight_animation = animation.CharacterAnimation(\"knight_m\") # Tạo animation cho knight.\nknight_animation.update(pygame.time.get_ticks()) # Cập nhật animation\nknight_animation.render(screen, position=(100, 100), hp=1, max_hp=1) # Hiển thị animation lên màn hình.\nknight_animation.set_state(\"idle_anim_left\") # chuyển sang trạng thái khác.\nknight_animation.add_effect(animation.EffectAnimation(\"thunder\", frame_speed=0.1, life_span=1)) # Thêm hiệu ứng cho nhân vật.\n# Mỗi nhân vật khi bị tấn công sẽ có các hiệu ứng như chảy máu, cháy lửa, sét đánh, ...\n# Sau khi thêm hiệu ứng thì khi chạy hết life_span sẽ tự động xóa hiệu ứng đó.\n# Ngoài ra còn:\nknight_animation.get_current_state() # Trả về tên trạng thái hiện tại của nhân vật.\nknight_animation.get_height() # Trả về chiều cao của ảnh hiện tại",
-        "detail": "huong_dan",
-        "documentation": {}
-    },
-    {
         "label": "render_map",
         "kind": 2,
         "importPath": "map_test",
@@ -303,7 +285,7 @@
         "kind": 6,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.knight_animation = animation.CharacterAnimation(\"knight_m\", (100, 100))\n        self.knight_animation.set_state(\"run_anim_left\")\n        self.knight_animation.add_effect(animation.EffectAnimation(\"halo_explosion2\", frame_speed=0.1, life_span=10))\n        # self.knight2_animaiton = animation.CharacterAnimation(\"knight_m\")",
+        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.knight_animation = animation.CharacterAnimation(\"knight_m\", (100, 100))\n        self.knight_animation._set_state(\"run_anim_left\")\n        self.knight_animation.add_effect(animation.EffectAnimation(\"halo_explosion2\", frame_speed=0.1, life_span=10))\n        # self.knight2_animaiton = animation.CharacterAnimation(\"knight_m\")",
         "detail": "test",
         "documentation": {}
     }

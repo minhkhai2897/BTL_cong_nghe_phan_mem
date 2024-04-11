@@ -14,10 +14,8 @@ class Animation(ABC):
         self._images = SPRITE.get_images(self._current_state)
         self._is_change_state = False
         self._current_img = self._images[0]
-
         self._current_img_rect = self._current_img.get_rect()
         self.set_position(position)
-
         self._current_frame = 0  
         self._last_update_time = 0  
         self._frame_speed = frame_speed 
@@ -27,7 +25,7 @@ class Animation(ABC):
         """ Trả về tên của đối tượng."""
         return self._name
     
-    def set_state(self, state: str):
+    def _set_state(self, state: str):
         """ Thiết lập trạng thái mới. """
         if (state not in self._state_list):
             raise ValueError(f"State {state} is not in the state_list")
@@ -52,7 +50,7 @@ class Animation(ABC):
         """ Kiểm tra va chạm với một bouding box khác."""
         return self._current_img_rect.colliderect(other.get_rect())
 
-    def get_current_state(self) -> str:
+    def _get_current_state(self) -> str:
         """ Trả về tên của trạng thái hiện tại."""
         return self._current_state
 
@@ -66,14 +64,17 @@ class Animation(ABC):
             self._current_frame = 0
             self._is_change_state = False
             self._last_update_time = current_time
+            self.__set_current_image()
         else:
             SECOND_MS = 1000
             elapsed_time = current_time - self._last_update_time
             if elapsed_time >= (self._frame_speed * SECOND_MS):
                 self._last_update_time = current_time
                 self._current_frame = (self._current_frame + 1) % len(self._images)
-        self._current_img = self._images[self._current_frame]
+                self.__set_current_image()
 
+    def __set_current_image(self):
+        self._current_img = self._images[self._current_frame]
         position = self._current_img_rect.topleft
         self._current_img_rect = self._current_img.get_rect()
         self.set_position(position)

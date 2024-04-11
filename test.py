@@ -11,7 +11,7 @@ class Game:
         self.is_running = True
 
         self.knight_animation = animation.CharacterAnimation("knight_m", (100, 100))
-        self.knight_animation.set_state("run_anim_left")
+        self.knight_animation._set_state("run_anim_left")
         self.knight_animation.add_effect(animation.EffectAnimation("halo_explosion2", frame_speed=0.1, life_span=10))
         # self.knight2_animaiton = animation.CharacterAnimation("knight_m")
         # self.knight2_animaiton.set_state("idle_anim_left")
@@ -53,7 +53,7 @@ class Game:
         self.screen.fill((0, 0, 0))
         map_test.render_map(self.screen)
 
-        self.knight_animation.render(self.screen, 1, 1)
+        self.knight_animation.render(self.screen, 400, 101)
         # self.knight2_animaiton.render(self.screen, (200, 100), 450, 200)
         # self.big_demon_animation.render(self.screen, (300, 100), 1, 1)
         # self.wizzard_animation.render(self.screen, (400, 100), 1, 1)
