@@ -2,6 +2,7 @@ import pygame
 import animation
 import map_test
 from helper import SCREEN_WIDTH, SCREEN_HEIGHT
+from animation._weapon_animation import WeaponAnimation
 
 class Game:
     def __init__(self):
@@ -10,9 +11,21 @@ class Game:
         self.clock = pygame.time.Clock()
         self.is_running = True
 
-        self.knight_animation = animation.CharacterAnimation("knight_m", (100, 100))
-        self.knight_animation._set_state("run_anim_left")
+        self.knight_animation = animation.CharacterAnimation("knight_m", (1000, 100))
+        # self.knight_animation._set_state("run_anim_left")
         self.knight_animation.add_effect(animation.EffectAnimation("halo_explosion2", frame_speed=0.1, life_span=10))
+        
+        self.knight_animation1 = animation.CharacterAnimation("knight_m", (1000, 100))
+        self.knight_animation1.set_center((1200, 100))
+
+        self.weapon = animation.WeaponAnimation("holy_sword", (0, 0), 0.1)
+        # self.weapon.set_state("left")
+        self.knight_animation.add_weapon(self.weapon)
+        # self.weapon.set_state("right")
+        # self.weapon.set_state("left")
+        self.bullet = animation.BulletAnimation("fireball", (0, 0), 45, 0.1)
+        
+        
         # self.knight2_animaiton = animation.CharacterAnimation("knight_m")
         # self.knight2_animaiton.set_state("idle_anim_left")
         # self.big_demon_animation = animation.CharacterAnimation("big_demon")
@@ -42,7 +55,11 @@ class Game:
             
     def update(self):
         self.knight_animation.update(pygame.time.get_ticks())
-        self.knight_animation.move(1, 1)
+        self.knight_animation.move(-1, 1)
+        self.bullet.move(1, 1)
+        # self.weapon.update(pygame.time.get_ticks())
+        self.knight_animation1.update(pygame.time.get_ticks())
+        self.bullet.update(pygame.time.get_ticks())
         # self.knight2_animaiton.update(pygame.time.get_ticks())
         # self.big_demon_animation.update(pygame.time.get_ticks())
         # self.wizzard_animation.update(pygame.time.get_ticks())
@@ -54,6 +71,10 @@ class Game:
         map_test.render_map(self.screen)
 
         self.knight_animation.render(self.screen, 400, 101)
+        self.knight_animation1.render(self.screen, 400, 101)
+        self.bullet.render(self.screen)
+        # self.weapon.render(self.screen)
+        
         # self.knight2_animaiton.render(self.screen, (200, 100), 450, 200)
         # self.big_demon_animation.render(self.screen, (300, 100), 1, 1)
         # self.wizzard_animation.render(self.screen, (400, 100), 1, 1)
