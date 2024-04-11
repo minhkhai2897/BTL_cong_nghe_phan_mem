@@ -16,7 +16,7 @@ class EffectAnimation(Animation):
     def is_end(self) -> bool:
         return self.__is_end
     
-    def set_state(self, state: str):
+    def _set_state(self, state: str):
         """ Không set_state cho effect animation"""
         return 
 

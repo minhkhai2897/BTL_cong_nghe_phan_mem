@@ -38,7 +38,7 @@ class CharacterAnimation(Animation):
     def render(self, screen: pygame.surface.Surface, hp, max_hp):
         """ Hiển thị hình ảnh hiện tại lên màn hình và các hiệu ứng của nhân vật."""
         super().render(screen)
-        # self.__render_hp(screen, position, hp, max_hp)
+        self.__render_hp(screen, hp, max_hp)
         self.__render_effects(screen)
 
     def __render_effects(self, screen: pygame.surface.Surface):
@@ -56,31 +56,31 @@ class CharacterAnimation(Animation):
 
                 effect.render(screen)
 
-    # def __render_hp(self, screen: pygame.surface.Surface, position: tuple[float, float], hp: int, max_hp: int):
-    #     """ Hiển thị thanh máu của nhân vật."""
-    #     if (hp <= 0) or (max_hp <= 0):
-    #         return
+    def __render_hp(self, screen: pygame.surface.Surface, hp: int, max_hp: int):
+        """ Hiển thị thanh máu của nhân vật."""
+        if (hp <= 0) or (max_hp <= 0):
+            return
         
-    #     LENGTH = min(28, self._current_img.get_width())
-    #     DISTANCE_y = 3
+        LENGTH = min(28, self._current_img.get_width())
+        DISTANCE_y = 3
 
-    #     if (hp < max_hp):
-    #         start_pos = (position[0] + ((self._current_img.get_width() - LENGTH) / 2), position[1])
-    #         end_pos = (start_pos[0] + (LENGTH * hp / max_hp), start_pos[1])
-    #         pygame.draw.line(screen, (255, 0, 0), start_pos, end_pos, 2)
-    #     elif (hp > max_hp):
-    #         z1 = (hp - max_hp) // max_hp
-    #         z2 = hp % max_hp
-    #         for i in range(z1):
-    #             start_pos = (position[0] + ((self._current_img.get_width() - LENGTH) / 2), position[1] - DISTANCE_y * (i))
-    #             end_pos = (start_pos[0] + LENGTH, start_pos[1])
-    #             pygame.draw.line(screen, (0, 0, 255), start_pos, end_pos, 2)
-    #         if (z2 > 0):
-    #             start_pos = (position[0] + ((self._current_img.get_width() - LENGTH) / 2), position[1] - DISTANCE_y * (z1))
-    #             end_pos = (start_pos[0] + (LENGTH * z2 / max_hp), start_pos[1])
-    #             pygame.draw.line(screen, (0, 0, 255), start_pos, end_pos, 2)                      
+        if (hp < max_hp):
+            start_pos = (self.get_position()[0] + ((self._current_img.get_width() - LENGTH) / 2), self.get_position()[1])
+            end_pos = (start_pos[0] + (LENGTH * hp / max_hp), start_pos[1])
+            pygame.draw.line(screen, (255, 0, 0), start_pos, end_pos, 2)
+        elif (hp > max_hp):
+            z1 = (hp - max_hp) // max_hp
+            z2 = hp % max_hp
+            for i in range(z1):
+                start_pos = (self.get_position()[0] + ((self._current_img.get_width() - LENGTH) / 2), self.get_position()[1] - DISTANCE_y * (i))
+                end_pos = (start_pos[0] + LENGTH, start_pos[1])
+                pygame.draw.line(screen, (0, 0, 255), start_pos, end_pos, 2)
+            if (z2 > 0):
+                start_pos = (self.get_position()[0] + ((self._current_img.get_width() - LENGTH) / 2), self.get_position()[1] - DISTANCE_y * (z1))
+                end_pos = (start_pos[0] + (LENGTH * z2 / max_hp), start_pos[1])
+                pygame.draw.line(screen, (0, 0, 255), start_pos, end_pos, 2)                      
             
-    def set_state(self, state: str):
+    def _set_state(self, state: str):
         """
         States: 
             - idle_anim_left
@@ -92,9 +92,9 @@ class CharacterAnimation(Animation):
 
         Các nhân vật kẻ thù không có hit_anim
         """
-        return super().set_state(self._name + "_" + state)
+        return super()._set_state(self._name + "_" + state)
     
-    def get_current_state(self) -> str:
+    def _get_current_state(self) -> str:
         """ 
         Trả về tên của trạng thái hiện tại. 
         
