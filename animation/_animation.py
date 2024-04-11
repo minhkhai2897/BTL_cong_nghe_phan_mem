@@ -3,7 +3,7 @@ from abc import ABC
 from ._sprite import SPRITE
 
 class Animation(ABC):
-    def __init__(self, state_list = list[str], frame_speed: int = 0.1):
+    def __init__(self, state_list : list[str], position : tuple[float, float], frame_speed: int = 0.1):
         """ 
         Parameters:
             state_list: Danh sách các trạng thái của đối tượng (list[str])
@@ -14,7 +14,10 @@ class Animation(ABC):
         self._images = SPRITE.get_images(self._current_state)
         self._is_change_state = False
         self._current_img = self._images[0]
+
         self._current_img_rect = self._current_img.get_rect()
+        self.set_position(position)
+
         self._current_frame = 0  
         self._last_update_time = 0  
         self._frame_speed = frame_speed 
@@ -53,9 +56,8 @@ class Animation(ABC):
         """ Trả về tên của trạng thái hiện tại."""
         return self._current_state
 
-    def render(self, screen: pygame.surface.Surface, position: tuple[float, float]):
+    def render(self, screen: pygame.surface.Surface):
         """ Hiển thị hình ảnh hiện tại lên màn hình."""
-        self._current_img_rect.topleft = position
         screen.blit(self._current_img, self._current_img_rect)
 
     def update(self, current_time: int):
@@ -72,8 +74,18 @@ class Animation(ABC):
                 self._current_frame = (self._current_frame + 1) % len(self._images)
         self._current_img = self._images[self._current_frame]
 
-    def render_center (self, screen: pygame.surface.Surface, position: tuple[float, float]):
-        """ Hiển thị hình ảnh hiện tại lên màn hình, tâm của hình trùng với vị trí truyền vào."""
-        x = position[0] - self._current_img.get_width() / 2
-        y = position[1] - self._current_img.get_height() / 2
-        self.render(screen, (x, y))
+        position = self._current_img_rect.topleft
+        self._current_img_rect = self._current_img.get_rect()
+        self.set_position(position)
+
+    def move(self, dx, dy):
+        self._current_img_rect.move_ip(dx, dy)
+    
+    def get_position(self) -> tuple[float, float]:
+        return self._current_img_rect.topleft
+    
+    def set_position(self, position : tuple[float, float]):
+        self._current_img_rect.topleft = position
+
+
+    
