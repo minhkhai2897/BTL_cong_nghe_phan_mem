@@ -3,6 +3,7 @@ import animation
 import map_test
 from helper import SCREEN_WIDTH, SCREEN_HEIGHT
 from animation._weapon_animation import WeaponAnimation
+from map_test import Map
 
 class Game:
     def __init__(self):
@@ -10,20 +11,21 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.is_running = True
+        self.map = Map()
 
         self.knight_animation = animation.CharacterAnimation("knight_m", (1000, 100))
         # self.knight_animation._set_state("run_anim_left")
         self.knight_animation.add_effect(animation.EffectAnimation("halo_explosion2", frame_speed=0.1, life_span=10))
         
-        self.knight_animation1 = animation.CharacterAnimation("knight_m", (1000, 100))
-        self.knight_animation1.set_center((1200, 100))
+        self.knight_animation1 = animation.CharacterAnimation("knight_m", (0, 0))
 
         self.weapon = animation.WeaponAnimation("holy_sword", (0, 0), 0.1)
         # self.weapon.set_state("left")
         self.knight_animation.add_weapon(self.weapon)
         # self.weapon.set_state("right")
         # self.weapon.set_state("left")
-        self.bullet = animation.BulletAnimation("fireball", (0, 0), 45, 0.1)
+        self.bullet = animation.BulletAnimation("fireball", (0, 0), 0.1)
+        self.bullet.set_center(self.knight_animation1.get_center())
         
         
         # self.knight2_animaiton = animation.CharacterAnimation("knight_m")
@@ -56,7 +58,7 @@ class Game:
     def update(self):
         self.knight_animation.update(pygame.time.get_ticks())
         self.knight_animation.move(-1, 1)
-        self.bullet.move(1, 1)
+        self.bullet.move(1, 2)
         # self.weapon.update(pygame.time.get_ticks())
         self.knight_animation1.update(pygame.time.get_ticks())
         self.bullet.update(pygame.time.get_ticks())
@@ -65,10 +67,11 @@ class Game:
         # self.wizzard_animation.update(pygame.time.get_ticks())
         # self.wogol.update(pygame.time.get_ticks())
         # self.knight_animation.move(1, 1)
+        self.map.update(pygame.time.get_ticks())
 
     def render(self):
         self.screen.fill((0, 0, 0))
-        map_test.render_map(self.screen)
+        self.map.render(self.screen)
 
         self.knight_animation.render(self.screen, 400, 101)
         self.knight_animation1.render(self.screen, 400, 101)
