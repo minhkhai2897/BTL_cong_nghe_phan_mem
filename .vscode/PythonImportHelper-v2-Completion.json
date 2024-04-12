@@ -51,22 +51,6 @@
         "documentation": {}
     },
     {
-        "label": "MAP_WIDTH",
-        "importPath": "helper",
-        "description": "helper",
-        "isExtraImport": true,
-        "detail": "helper",
-        "documentation": {}
-    },
-    {
-        "label": "MAP_HEIGHT",
-        "importPath": "helper",
-        "description": "helper",
-        "isExtraImport": true,
-        "detail": "helper",
-        "documentation": {}
-    },
-    {
         "label": "SCREEN_WIDTH",
         "importPath": "helper",
         "description": "helper",
@@ -83,36 +67,19 @@
         "documentation": {}
     },
     {
-        "label": "Block",
-        "importPath": "block",
-        "description": "block",
-        "isExtraImport": true,
-        "detail": "block",
-        "documentation": {}
-    },
-    {
-        "label": "map_test",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "map_test",
-        "description": "map_test",
-        "detail": "map_test",
-        "documentation": {}
-    },
-    {
-        "label": "Map",
-        "importPath": "map_test",
-        "description": "map_test",
-        "isExtraImport": true,
-        "detail": "map_test",
-        "documentation": {}
-    },
-    {
         "label": "WeaponAnimation",
         "importPath": "animation._weapon_animation",
         "description": "animation._weapon_animation",
         "isExtraImport": true,
         "detail": "animation._weapon_animation",
+        "documentation": {}
+    },
+    {
+        "label": "Map",
+        "importPath": "map",
+        "description": "map",
+        "isExtraImport": true,
+        "detail": "map",
         "documentation": {}
     },
     {
@@ -235,10 +202,64 @@
     {
         "label": "Block",
         "kind": 6,
-        "importPath": "block",
-        "description": "block",
-        "peekOfCode": "class Block():\n    def __init__(self, anim: animation.BackgroundAnimation):\n        self.__animation = anim\n    def update(self, current_time: int):\n        self.__animation.update(current_time)\n    def render(self, screen):\n        self.__animation.render(screen)",
-        "detail": "block",
+        "importPath": "map.block",
+        "description": "map.block",
+        "peekOfCode": "class Block():\n    def __init__(self, anim: animation.BackgroundAnimation):\n        self.anim = anim\n    def update(self, current_time: int):\n        self.anim.update(current_time)\n    def render(self, screen):\n        self.anim.render(screen)",
+        "detail": "map.block",
+        "documentation": {}
+    },
+    {
+        "label": "SCREEN_WIDTH",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "SCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nSCALED_SIZE = animation.SCALE_RATIO * 16\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "detail": "map.helper",
+        "documentation": {}
+    },
+    {
+        "label": "SCREEN_HEIGHT",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "SCREEN_HEIGHT = 896\nSCALED_SIZE = animation.SCALE_RATIO * 16\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "detail": "map.helper",
+        "documentation": {}
+    },
+    {
+        "label": "SCALED_SIZE",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "SCALED_SIZE = animation.SCALE_RATIO * 16\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "detail": "map.helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAP_WIDTH",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "MAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "detail": "map.helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAP_HEIGHT",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "MAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "detail": "map.helper",
+        "documentation": {}
+    },
+    {
+        "label": "Map",
+        "kind": 6,
+        "importPath": "map.map",
+        "description": "map.map",
+        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = [[None for i in range(MAP_WIDTH)] for j in range(MAP_HEIGHT)]\n        for i in range(MAP_HEIGHT):\n            for j in range(MAP_WIDTH):\n                map [i][j] = (Block(animation.BackgroundAnimation(\"floor_1\", (j * 32, i * 32), 1)))",
+        "detail": "map.map",
         "documentation": {}
     },
     {
@@ -302,15 +323,6 @@
         "description": "helper",
         "peekOfCode": "MAX_PALYERS_NUM = 2",
         "detail": "helper",
-        "documentation": {}
-    },
-    {
-        "label": "Map",
-        "kind": 6,
-        "importPath": "map_test",
-        "description": "map_test",
-        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = [[None for i in range(MAP_WIDTH)] for j in range(MAP_HEIGHT)]\n        for i in range(MAP_HEIGHT):\n            for j in range(MAP_WIDTH):\n                map [i][j] = (Block(animation.BackgroundAnimation(\"floor_1\", (j * 32, i * 32), 1)))",
-        "detail": "map_test",
         "documentation": {}
     },
     {

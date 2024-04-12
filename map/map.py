@@ -1,6 +1,6 @@
 import animation
-from block import Block
-from helper import MAP_WIDTH, MAP_HEIGHT
+from .block import Block
+from .helper import MAP_WIDTH, MAP_HEIGHT
 
 class Map():
     def __init__(self):
@@ -21,7 +21,6 @@ class Map():
         map = tuple(map)
         
         return map    
-    
     
     def update(self, current_time):
         for i in range(MAP_WIDTH):

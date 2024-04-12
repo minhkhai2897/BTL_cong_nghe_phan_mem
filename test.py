@@ -1,9 +1,8 @@
 import pygame
 import animation
-import map_test
 from helper import SCREEN_WIDTH, SCREEN_HEIGHT
 from animation._weapon_animation import WeaponAnimation
-from map_test import Map
+from map import Map
 
 class Game:
     def __init__(self):
@@ -69,6 +68,7 @@ class Game:
         # self.knight_animation.move(1, 1)
         self.map.update(pygame.time.get_ticks())
 
+
     def render(self):
         self.screen.fill((0, 0, 0))
         self.map.render(self.screen)
@@ -83,6 +83,7 @@ class Game:
         # self.wizzard_animation.render(self.screen, (400, 100), 1, 1)
 
         # self.wogol.render(self.screen, (800, 100), 2, 2)
+        print(self.map[1][2])
 
         pygame.display.flip()
 
