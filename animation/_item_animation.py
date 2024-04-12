@@ -2,7 +2,7 @@ from ._animation import Animation
 from ._sprite import SPRITE
 
 class ItemAnimation(Animation):
-    def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed = 0.1):
+    def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed : float = 0.1):
         """
         ['chest_empty_open_anim', 'chest_full_open_anim', 'chest_mimic_open_anim']
         

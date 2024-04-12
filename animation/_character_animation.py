@@ -5,7 +5,7 @@ from ._effect_animation import EffectAnimation
 from ._weapon_animation import WeaponAnimation
 
 class CharacterAnimation(Animation):
-    def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed = 0.1):
+    def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed : float = 0.1):
         """
         Parameters:
             name: Tên nhân vật (str).

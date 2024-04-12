@@ -3,7 +3,7 @@ from abc import ABC
 from ._sprite import SPRITE
 
 class Animation(ABC):
-    def __init__(self, state_list : tuple[str], position : tuple[float, float], frame_speed: int = 0.1):
+    def __init__(self, state_list : tuple[str], position : tuple[float, float], frame_speed: float):
         """ 
         Parameters:
             state_list: Danh sách các trạng thái của đối tượng (list[str])
@@ -21,6 +21,14 @@ class Animation(ABC):
         self._frame_speed = frame_speed 
         self._name = ""
     
+    def set_frame_speed(self, frame_speed: float):
+        """ Thiết lập tốc độ chuyển đổi giữa các frame (frame/s)."""
+        self._frame_speed = frame_speed
+
+    def get_frame_speed(self) -> float:
+        """ Trả về tốc độ chuyển đổi giữa các frame (frame/s)."""
+        return self._frame_speed
+
     def get_name(self) -> str:
         """ Trả về tên của đối tượng."""
         return self._name
@@ -75,11 +83,12 @@ class Animation(ABC):
 
     def __set_current_image(self):
         self._current_img = self._images[self._current_frame]
-        position = self._current_img_rect.topleft
-        self._current_img_rect = self._current_img.get_rect()
-        self.set_position(position)
+        # position = self._current_img_rect.topleft
+        # self._current_img_rect = self._current_img.get_rect()
+        # self.set_position(position)
 
-    def move(self, dx, dy):
+    def move(self, dx : float, dy : float):
+        """ Di chuyển hình ảnh hiện tại."""
         self._current_img_rect.move_ip(dx, dy)
     
     def get_position(self) -> tuple[float, float]:
