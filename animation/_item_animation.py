@@ -2,7 +2,7 @@ from ._animation import Animation
 from ._sprite import SPRITE
 
 class ItemAnimation(Animation):
-    def __init__(self, name: str, frame_speed = 0.1):
+    def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed : float = 0.1):
         """
         ['chest_empty_open_anim', 'chest_full_open_anim', 'chest_mimic_open_anim']
         
@@ -13,5 +13,5 @@ class ItemAnimation(Animation):
         ['ui_heart_full', 'ui_heart_half', 'ui_heart_empty']
         """
         state_list = SPRITE.get_items(name)
-        super().__init__(state_list, frame_speed)
+        super().__init__(state_list, position, frame_speed)
         self._name = name
