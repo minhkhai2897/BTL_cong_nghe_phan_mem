@@ -47,7 +47,7 @@ class CharacterAnimation(Animation):
         """ Cập nhật hình ảnh hiện tại và các hiệu ứng của nhân vật."""
         super().update(current_time)
         self.__update_state()
-        if self.__weapon is not None:
+        if not self.__weapon is None:
             self.__weapon.update(current_time)
         for effect in self.__effects:
             effect.update(current_time)
@@ -62,16 +62,14 @@ class CharacterAnimation(Animation):
             self.__update_weapon_state("right")
 
     def __update_weapon_state(self, direction : str):
-        if self.__weapon is None:
-            return
-        self.__weapon.set_state(direction)
+        if not self.__weapon is None:
+            self.__weapon.set_state(direction)
 
     def render(self, screen: pygame.surface.Surface, hp, max_hp):
         """ Hiển thị hình ảnh hiện tại lên màn hình và các hiệu ứng của nhân vật."""
         super().render(screen)
         self.__render_hp(screen, hp, max_hp)
         self.__render_weapon(screen)
-
         self.__render_effects(screen)
 
     def __render_effects(self, screen: pygame.surface.Surface):

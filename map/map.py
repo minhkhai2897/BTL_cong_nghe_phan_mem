@@ -14,12 +14,9 @@ class Map():
 
         for i in range(MAP_HEIGHT):
             for j in range(MAP_WIDTH):
-                map [i][j] = (Block(animation.BackgroundAnimation("floor_1", (j * 32, i * 32), 1)))
+                map[i][j] = Block(animation.BackgroundAnimation("floor_1", (j * 32, i * 32), 1))
 
-        for i in range(MAP_HEIGHT):
-            map[i] = tuple(map[i])
-        map = tuple(map)
-        
+        map = tuple(tuple(map[i]) for i in range(MAP_HEIGHT))
         return map    
     
     def update(self, current_time):

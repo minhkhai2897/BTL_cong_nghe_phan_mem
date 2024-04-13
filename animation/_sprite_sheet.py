@@ -193,21 +193,13 @@ class SpriteSheet:
     def get_characters(self):
         characters_states = {}
         for key, value in self.__characters.items():
-            characters_states[key] = []
-            for state in value:
-                characters_states[key].append(state + "_right")
-                characters_states[key].append(state + "_left")
-            characters_states[key] = tuple(characters_states[key])
+            characters_states[key] = tuple(s for state in value for s in (state + "_right", state + "_left"))
         return characters_states
     
     def get_weapons(self):
         weapons_states = {}
         for key, value in self.__weapons.items():
-            weapons_states[key] = []
-            for state in value:
-                weapons_states[key].append(state + "_right")
-                weapons_states[key].append(state + "_left")
-            weapons_states[key] = tuple(weapons_states[key])
+            weapons_states[key] = tuple(s for state in value for s in (state + "_right", state + "_left"))
         return weapons_states
     
     def get_effects(self):
