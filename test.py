@@ -1,7 +1,6 @@
 import pygame
 import animation
 from helper import SCREEN_WIDTH, SCREEN_HEIGHT
-from animation._weapon_animation import WeaponAnimation
 from map import Map
 
 class Game:
@@ -13,7 +12,7 @@ class Game:
         self.map = Map()
 
         self.knight_animation = animation.CharacterAnimation("knight_m", (1000, 100))
-        # self.knight_animation._set_state("run_anim_left")
+        # self.knight_animation.set_state("run_anim_left")
         self.knight_animation.add_effect(animation.EffectAnimation("halo_explosion2", frame_speed=0.1, life_span=10))
         
         self.knight_animation1 = animation.CharacterAnimation("knight_m", (0, 0))
@@ -83,7 +82,6 @@ class Game:
         # self.wizzard_animation.render(self.screen, (400, 100), 1, 1)
 
         # self.wogol.render(self.screen, (800, 100), 2, 2)
-        print(self.map[1][2])
 
         pygame.display.flip()
 

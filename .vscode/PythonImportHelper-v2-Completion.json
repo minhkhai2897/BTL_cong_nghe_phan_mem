@@ -67,14 +67,6 @@
         "documentation": {}
     },
     {
-        "label": "WeaponAnimation",
-        "importPath": "animation._weapon_animation",
-        "description": "animation._weapon_animation",
-        "isExtraImport": true,
-        "detail": "animation._weapon_animation",
-        "documentation": {}
-    },
-    {
         "label": "Map",
         "importPath": "map",
         "description": "map",
@@ -132,7 +124,7 @@
         "kind": 6,
         "importPath": "animation._helper",
         "description": "animation._helper",
-        "peekOfCode": "class ImageProcessor:\n    @staticmethod\n    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:\n        new_images = []\n        for image in images:\n            new_image = ImageProcessor.process_image(image, flip, scaled)\n            new_images.append(new_image)\n        return tuple(new_images)\n    @staticmethod\n    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:",
+        "peekOfCode": "class ImageProcessor:\n    @staticmethod\n    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:\n        new_images = tuple(ImageProcessor.process_image(image, flip, scaled) for image in images)\n        return new_images\n    @staticmethod\n    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:\n        new_image = image\n        if flip:\n            new_image = ImageProcessor.flip(new_image)",
         "detail": "animation._helper",
         "documentation": {}
     },
@@ -150,7 +142,7 @@
         "kind": 5,
         "importPath": "animation._helper",
         "description": "animation._helper",
-        "peekOfCode": "SCALE_RATIO = 2\nclass ImageProcessor:\n    @staticmethod\n    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:\n        new_images = []\n        for image in images:\n            new_image = ImageProcessor.process_image(image, flip, scaled)\n            new_images.append(new_image)\n        return tuple(new_images)\n    @staticmethod",
+        "peekOfCode": "SCALE_RATIO = 2\nclass ImageProcessor:\n    @staticmethod\n    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:\n        new_images = tuple(ImageProcessor.process_image(image, flip, scaled) for image in images)\n        return new_images\n    @staticmethod\n    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:\n        new_image = image\n        if flip:",
         "detail": "animation._helper",
         "documentation": {}
     },
@@ -168,7 +160,7 @@
         "kind": 6,
         "importPath": "animation._sprite",
         "description": "animation._sprite",
-        "peekOfCode": "class Sprite():\n    def __init__(self):\n        # khởi tạo đối tượng SpriteSheet\n        self.__sprite_sheet = SpriteSheet()\n        # images là 1 dict chứa các list ảnh cho từng trạng thái của các nhân vật, hiệu ứng, vật phẩm, ...\n        self.__images = self.__sprite_sheet.extract_images_from_files_and_process(\"res/drawable/path_list\")\n        # danh sách các trạng thái của các nhân vật\n        self.__characters = self.__sprite_sheet.get_characters()\n        # danh sách các trạng thái của các hiệu ứng\n        self.__effects = self.__sprite_sheet.get_effects()",
+        "peekOfCode": "class Sprite():\n    def __init__(self):\n        # khởi tạo đối tượng SpriteSheet\n        sprite_sheet = SpriteSheet()\n        # images là 1 dict chứa các list ảnh cho từng trạng thái của các nhân vật, hiệu ứng, vật phẩm, ...\n        self.__images = sprite_sheet.extract_images_from_files_and_process(\"res/drawable/path_list\")\n        # danh sách các trạng thái của các nhân vật\n        self.__characters = sprite_sheet.get_characters()\n        # danh sách các trạng thái của các hiệu ứng\n        self.__effects = sprite_sheet.get_effects()",
         "detail": "animation._sprite",
         "documentation": {}
     },
@@ -258,7 +250,7 @@
         "kind": 6,
         "importPath": "map.map",
         "description": "map.map",
-        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = [[None for i in range(MAP_WIDTH)] for j in range(MAP_HEIGHT)]\n        for i in range(MAP_HEIGHT):\n            for j in range(MAP_WIDTH):\n                map [i][j] = (Block(animation.BackgroundAnimation(\"floor_1\", (j * 32, i * 32), 1)))",
+        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = [[None for i in range(MAP_WIDTH)] for j in range(MAP_HEIGHT)]\n        for i in range(MAP_HEIGHT):\n            for j in range(MAP_WIDTH):\n                map[i][j] = Block(animation.BackgroundAnimation(\"floor_1\", (j * 32, i * 32), 1))",
         "detail": "map.map",
         "documentation": {}
     },
@@ -330,7 +322,7 @@
         "kind": 6,
         "importPath": "test",
         "description": "test",
-        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map()\n        self.knight_animation = animation.CharacterAnimation(\"knight_m\", (1000, 100))\n        # self.knight_animation._set_state(\"run_anim_left\")\n        self.knight_animation.add_effect(animation.EffectAnimation(\"halo_explosion2\", frame_speed=0.1, life_span=10))",
+        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map()\n        self.knight_animation = animation.CharacterAnimation(\"knight_m\", (1000, 100))\n        # self.knight_animation.set_state(\"run_anim_left\")\n        self.knight_animation.add_effect(animation.EffectAnimation(\"halo_explosion2\", frame_speed=0.1, life_span=10))",
         "detail": "test",
         "documentation": {}
     }

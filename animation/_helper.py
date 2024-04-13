@@ -5,11 +5,8 @@ SCALE_RATIO = 2
 class ImageProcessor:
     @staticmethod
     def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:
-        new_images = []
-        for image in images:
-            new_image = ImageProcessor.process_image(image, flip, scaled)
-            new_images.append(new_image)
-        return tuple(new_images)
+        new_images = tuple(ImageProcessor.process_image(image, flip, scaled) for image in images)
+        return new_images
 
     @staticmethod
     def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:
@@ -29,7 +26,6 @@ class ImageProcessor:
     def flip(image: pygame.surface.Surface) -> pygame.surface.Surface:
         new_image = pygame.transform.flip(image, True, False)
         return new_image
-
 
 class FileReader:
     @staticmethod

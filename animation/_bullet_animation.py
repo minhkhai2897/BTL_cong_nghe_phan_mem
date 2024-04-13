@@ -29,6 +29,7 @@ class BulletAnimation(Animation):
                 self.__angle = 90
         else:
             self.__angle = - math.atan(dy / dx) * 180 / math.pi
+        # chưa hoàn thành.
     
     def rotate(self):
         self._current_img = pygame.transform.rotate(self._images[self._current_frame], self.__angle)
