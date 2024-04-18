@@ -65,7 +65,6 @@ class Game:
 
 
 
-
         for player in self.players:
             player.update(pygame.time.get_ticks())
         for character in self.idle_characters:
