@@ -89,7 +89,8 @@ class Animation(ABC):
 
     def move(self, dx : float, dy : float):
         """ Di chuyển hình ảnh hiện tại."""
-        self._current_img_rect.move_ip(dx, dy)
+        # self._current_img_rect.move_ip(dx, dy)
+        self._current_img_rect.topleft = (self._current_img_rect.left + dx, self._current_img_rect.top + dy)
     
     def get_position(self) -> tuple[float, float]:
         return self._current_img_rect.topleft
