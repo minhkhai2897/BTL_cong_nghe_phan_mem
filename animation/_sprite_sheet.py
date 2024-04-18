@@ -264,5 +264,7 @@ class SpriteSheet:
             for state in states:
                 dict_images[state] = ImageProcessor.process_images(dict_images[state], flip=False, scaled=SCALE_RATIO)
         
+        dict_images["floor_spikes_anim"] = tuple(list(dict_images["floor_spikes_anim"]) + list(dict_images["floor_spikes_anim"])[::-1])
+        
         return dict_images
     
