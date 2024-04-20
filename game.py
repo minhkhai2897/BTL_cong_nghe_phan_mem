@@ -9,8 +9,6 @@ from game_element.item import Item
 from game_element.bullet import Bullet
 from game_element.weapon import Weapon
 
-
-
 class Game:
     def __init__(self):
         pygame.init()
@@ -49,6 +47,12 @@ class Game:
 
         
         # xử lý tương tác giữa các list đặt ở đây
+        self.handle_collision_players_and_map()
+
+
+
+
+
         self.handle_collision_players_and_weapons()
         self.handle_collision_players_and_characters()
 
@@ -104,6 +108,14 @@ class Game:
 
     def remove_effect_end(self):
         self.effects = [effect for effect in self.effects if not effect.is_end()]
+
+
+    def handle_collision_players_and_map(self):
+        for player in self.players:
+            x = player[0].get_center()[0] // 32
+            y = player[0].get_center()[1] // 32
+            if (not self.map.has_map[y][x]):
+                player.die()
 
     def handle_collision_players_and_weapons(self):
         for player in self.players:

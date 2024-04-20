@@ -17,6 +17,14 @@
         "documentation": {}
     },
     {
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
         "label": "math",
         "kind": 6,
         "isExtraImport": true,
@@ -35,35 +43,44 @@
         "documentation": {}
     },
     {
-        "label": "SCREEN_WIDTH",
-        "importPath": "helper",
-        "description": "helper",
+        "label": "Weapon",
+        "importPath": "game_element.weapon",
+        "description": "game_element.weapon",
         "isExtraImport": true,
-        "detail": "helper",
+        "detail": "game_element.weapon",
         "documentation": {}
     },
     {
-        "label": "SCREEN_HEIGHT",
-        "importPath": "helper",
-        "description": "helper",
+        "label": "Weapon",
+        "importPath": "game_element.weapon",
+        "description": "game_element.weapon",
         "isExtraImport": true,
-        "detail": "helper",
+        "detail": "game_element.weapon",
         "documentation": {}
     },
     {
-        "label": "SCREEN_WIDTH",
-        "importPath": "helper",
-        "description": "helper",
+        "label": "random",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "helper",
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
         "documentation": {}
     },
     {
-        "label": "SCREEN_HEIGHT",
-        "importPath": "helper",
-        "description": "helper",
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
         "isExtraImport": true,
-        "detail": "helper",
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "TrapBlock",
+        "importPath": "map.trap_block",
+        "description": "map.trap_block",
+        "isExtraImport": true,
+        "detail": "map.trap_block",
         "documentation": {}
     },
     {
@@ -72,6 +89,62 @@
         "description": "map",
         "isExtraImport": true,
         "detail": "map",
+        "documentation": {}
+    },
+    {
+        "label": "SCREEN_WIDTH",
+        "importPath": "helper",
+        "description": "helper",
+        "isExtraImport": true,
+        "detail": "helper",
+        "documentation": {}
+    },
+    {
+        "label": "SCREEN_HEIGHT",
+        "importPath": "helper",
+        "description": "helper",
+        "isExtraImport": true,
+        "detail": "helper",
+        "documentation": {}
+    },
+    {
+        "label": "Snake",
+        "importPath": "game_element.snake",
+        "description": "game_element.snake",
+        "isExtraImport": true,
+        "detail": "game_element.snake",
+        "documentation": {}
+    },
+    {
+        "label": "Character",
+        "importPath": "game_element.character",
+        "description": "game_element.character",
+        "isExtraImport": true,
+        "detail": "game_element.character",
+        "documentation": {}
+    },
+    {
+        "label": "Effect",
+        "importPath": "game_element.effect",
+        "description": "game_element.effect",
+        "isExtraImport": true,
+        "detail": "game_element.effect",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "importPath": "game_element.item",
+        "description": "game_element.item",
+        "isExtraImport": true,
+        "detail": "game_element.item",
+        "documentation": {}
+    },
+    {
+        "label": "Bullet",
+        "importPath": "game_element.bullet",
+        "description": "game_element.bullet",
+        "isExtraImport": true,
+        "detail": "game_element.bullet",
         "documentation": {}
     },
     {
@@ -97,7 +170,7 @@
         "kind": 6,
         "importPath": "animation._bullet_animation",
         "description": "animation._bullet_animation",
-        "peekOfCode": "class BulletAnimation(Animation):\n    def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed : float = 0.1):\n        \"\"\"\n        ['arrow', 'axe', 'fireball', 'ice_pick']\n        \"\"\"\n        self.__angle = 0\n        state_list = SPRITE.get_bullets(name)\n        super().__init__(state_list, position, frame_speed)\n        self._name = name\n    def update(self, current_time: int):",
+        "peekOfCode": "class BulletAnimation(Animation):\n    def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed : float = 0.1):\n        \"\"\"\n        ['arrow', 'axe', 'fireball', 'ice_pick']\n        \"\"\"\n        state_list = SPRITE.get_bullets(name)\n        super().__init__(state_list, position, frame_speed)\n        self._name = name\n        self.__angle = 0\n    def update(self, current_time: int):",
         "detail": "animation._bullet_animation",
         "documentation": {}
     },
@@ -192,6 +265,78 @@
         "documentation": {}
     },
     {
+        "label": "Background",
+        "kind": 6,
+        "importPath": "game_element.background",
+        "description": "game_element.background",
+        "peekOfCode": "class Background(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['edge', 'hole']\n        ['column_top', 'column_mid', 'coulmn_base']\n        ['doors_all', 'doors_frame_left', 'doors_frame_top', 'doors_frame_righ', 'doors_leaf_closed', 'doors_leaf_open']\n        ['floor_1', 'floor_2', 'floor_3', 'floor_4', 'floor_5', 'floor_6', 'floor_7', 'floor_8', 'floor_ladder', 'floor_spikes_anim', 'floor_exit', 'floor_spike_disabled', 'floor_spike_enabled', 'floor_spike_out_ani', 'floor_spike_in_ani']\n        ['wall_top_left', 'wall_top_mid', 'wall_top_right', 'wall_left', 'wall_mid', 'wall_right', 'wall_fountain_top', 'wall_fountain_mid_red_anim', 'wall_fountain_basin_red_anim', 'wall_fountain_mid_blue_anim', 'wall_fountain_basin_blue_anim', 'wall_hole_1', 'wall_hole_2', 'wall_banner_red', 'wall_banner_blue', 'wall_banner_green', 'wall_banner_yellow', 'wall_column_top', 'wall_column_mid', 'wall_coulmn_base', 'wall_goo', 'wall_goo_base', 'wall_side_top_left', 'wall_side_top_right', 'wall_side_mid_left', 'wall_side_mid_right', 'wall_side_front_left', 'wall_side_front_right', 'wall_corner_top_left', 'wall_corner_top_right', 'wall_corner_left', 'wall_corner_right', 'wall_corner_bottom_left', 'wall_corner_bottom_right', 'wall_corner_front_left', 'wall_corner_front_right', 'wall_inner_corner_l_top_left', 'wall_inner_corner_l_top_rigth', 'wall_inner_corner_mid_left', 'wall_inner_corner_mid_rigth', 'wall_inner_corner_t_top_left', 'wall_inner_corner_t_top_rigth']\n        \"\"\"\n        super().__init__(animation.BackgroundAnimation(name, position))",
+        "detail": "game_element.background",
+        "documentation": {}
+    },
+    {
+        "label": "Bullet",
+        "kind": 6,
+        "importPath": "game_element.bullet",
+        "description": "game_element.bullet",
+        "peekOfCode": "class Bullet(Entity):\n    def __init__(self, name, position, speed : float = 4, angle : float = 0):\n        \"\"\"\n        ['arrow', 'axe', 'fireball', 'ice_pick']\n        \"\"\"\n        self.__speed = speed\n        self.__angle = angle * math.pi / 180\n        super().__init__(animation.BulletAnimation(name, position))\n    def update(self, current_time):\n        self.move()",
+        "detail": "game_element.bullet",
+        "documentation": {}
+    },
+    {
+        "label": "Character",
+        "kind": 6,
+        "importPath": "game_element.character",
+        "description": "game_element.character",
+        "peekOfCode": "class Character(Entity):\n    def __init__(self, name, position, max_hp):\n        \"\"\"\n        ['knight_m', 'knight_f', 'wizzard_m', 'wizzard_f', 'lizard_m', 'lizard_f', 'elf_m', 'elf_f']\n        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',\n        \"\"\"\n        super().__init__(animation.CharacterAnimation(name, position))\n        self.__max_hp = max_hp\n        self.__hp = max_hp\n        self.__dame = 1",
+        "detail": "game_element.character",
+        "documentation": {}
+    },
+    {
+        "label": "Effect",
+        "kind": 6,
+        "importPath": "game_element.effect",
+        "description": "game_element.effect",
+        "peekOfCode": "class Effect(Entity):\n    def __init__(self, name, position, life_span : int = 1):\n        \"\"\"\n        ['attack_up', 'blood1', 'blood2', 'blood3', 'blood4', 'bloodBound', 'clawfx', 'clawfx2', 'cross_hit', 'explosion2', 'fireball_explosion1', 'golden_cross_hit', 'halo_explosion1', 'halo_explosion2', 'holy_shield', 'hp_med', 'ice', 'iceShatter', 'purple_ball', 'purple_exp', 'shine', 'solidfx', 'solid_greenfx', 'swordfx', 'thunder', 'thunder_yellow']\n        \"\"\"\n        super().__init__(animation.EffectAnimation(name, position, frame_speed = 0.1, life_span=life_span))\n    def update(self, current_time):\n        self.anim.update(current_time)\n    def render(self, screen):\n        self.anim.render(screen)",
+        "detail": "game_element.effect",
+        "documentation": {}
+    },
+    {
+        "label": "Entity",
+        "kind": 6,
+        "importPath": "game_element.entity",
+        "description": "game_element.entity",
+        "peekOfCode": "class Entity(ABC):\n    def __init__(self, anim : animation.Animation):\n        self.anim = anim\n    def get_name(self) -> str:\n        return self.anim.get_name()\n    def get_width(self) -> int:\n        return self.anim.get_width()\n    def get_height(self) -> int:\n        return self.anim.get_height()\n    def get_rect(self) -> pygame.Rect:",
+        "detail": "game_element.entity",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "kind": 6,
+        "importPath": "game_element.item",
+        "description": "game_element.item",
+        "peekOfCode": "class Item(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['chest_empty_open_anim', 'chest_full_open_anim', 'chest_mimic_open_anim']\n        ['flask_big_red', 'flask_big_blue', 'flask_big_green', 'flask_big_yellow', 'flask_red', 'flask_blue', 'flask_green', 'flask_yellow']\n        ['skull', 'crate', 'coin_anim']\n        ['ui_heart_full', 'ui_heart_half', 'ui_heart_empty']\"\"\"\n        super().__init__(animation.ItemAnimation(name, position))\n    def update(self, current_time):\n        self.anim.update(current_time)",
+        "detail": "game_element.item",
+        "documentation": {}
+    },
+    {
+        "label": "Snake",
+        "kind": 6,
+        "importPath": "game_element.snake",
+        "description": "game_element.snake",
+        "peekOfCode": "class Snake():\n    def __init__(self, speed = 2):\n        self.__list = [Character('knight_m', (500, 500), 100), Character('knight_m', (532, 500), 100),\n                       Character('knight_m', (564, 500), 100), Character('knight_m', (596, 500), 100)]\n        self.speed = speed\n        self.distance_between_characters = 32 + self.speed\n        self.__live = True\n    def __getitem__(self, index: int):\n        return self.__list[index]\n    def add_character(self, name, position):",
+        "detail": "game_element.snake",
+        "documentation": {}
+    },
+    {
+        "label": "Weapon",
+        "kind": 6,
+        "importPath": "game_element.weapon",
+        "description": "game_element.weapon",
+        "peekOfCode": "class Weapon(Entity):\n    def __init__(self, name, position, dame : int = 0, range : int = 0, speed_attack : float = 0):\n        \"\"\"\n        ['knife', 'rusty_sword', 'regular_sword', 'red_gem_sword', 'big_hammer', 'hammer', 'baton_with_spikes', 'mace', 'katana', 'saw_sword', 'anime_sword', 'axe', 'machete', 'cleaver', 'duel_sword', 'knight_sword', 'golden_sword', 'lavish_sword', 'red_magic_staff', 'green_magic_staff', 'spear', 'purple_staff', 'thunder_staff', 'bow', 'holy_sword', 'fire_sword', 'ice_sword', 'grass_sword', 'iron_sword']\n        \"\"\"\n        super().__init__(animation.WeaponAnimation(name, position))\n        self.dame = dame\n        self.range = range\n        self.speed_attack = speed_attack\n    def update(self, current_time):",
+        "detail": "game_element.weapon",
+        "documentation": {}
+    },
+    {
         "label": "Block",
         "kind": 6,
         "importPath": "map.block",
@@ -246,12 +391,30 @@
         "documentation": {}
     },
     {
+        "label": "TileType",
+        "kind": 6,
+        "importPath": "map.map",
+        "description": "map.map",
+        "peekOfCode": "class TileType(Enum):\n    FLOOR = 0\n    WALL = 1\n    SPIKE = 2\nclass Map():\n    def __init__(self):\n        self.__tuple, self.has_map, self.is_trap, self.__animated_block_positions = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):",
+        "detail": "map.map",
+        "documentation": {}
+    },
+    {
         "label": "Map",
         "kind": 6,
         "importPath": "map.map",
         "description": "map.map",
-        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = [[None for i in range(MAP_WIDTH)] for j in range(MAP_HEIGHT)]\n        for i in range(MAP_HEIGHT):\n            for j in range(MAP_WIDTH):\n                map[i][j] = Block(animation.BackgroundAnimation(\"floor_1\", (j * 32, i * 32), 1))",
+        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple, self.has_map, self.is_trap, self.__animated_block_positions = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = self.generate_map()\n        return map\n    def update(self, current_time):\n        for position in self.__animated_block_positions:",
         "detail": "map.map",
+        "documentation": {}
+    },
+    {
+        "label": "TrapBlock",
+        "kind": 6,
+        "importPath": "map.trap_block",
+        "description": "map.trap_block",
+        "peekOfCode": "class TrapBlock(Block):\n    def __init__(self, position: tuple[int, int]):\n        super().__init__(animation.BackgroundAnimation(\"floor_spikes_anim\", position, 0.5))\n        self.enable = True\n    def update(self, current_time: int):\n        super().update(current_time)",
+        "detail": "map.trap_block",
         "documentation": {}
     },
     {
@@ -259,7 +422,7 @@
         "kind": 6,
         "importPath": "game",
         "description": "game",
-        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n    def run(self):\n        while self.is_running:\n            self.handle_events()\n            self.update()",
+        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...\n        self.idle_characters = [Character(\"knight_m\", (100, 100), 100), Character(\"wizzard_m\", (200, 200), 100)]\n        self.effects = [Effect(\"thunder\", (300, 300), 5), Effect(\"thunder\", (400, 400), 1)]\n        self.items = [Item(\"chest_empty_open_anim\", (500, 500)), Item(\"chest_full_open_anim\", (600, 600)), Item(\"ui_heart_full\", (700, 700))]",
         "detail": "game",
         "documentation": {}
     },
@@ -315,15 +478,6 @@
         "description": "helper",
         "peekOfCode": "MAX_PALYERS_NUM = 2",
         "detail": "helper",
-        "documentation": {}
-    },
-    {
-        "label": "Game",
-        "kind": 6,
-        "importPath": "test",
-        "description": "test",
-        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map()\n        self.knight_animation = animation.CharacterAnimation(\"knight_m\", (1000, 100))\n        # self.knight_animation.set_state(\"run_anim_left\")\n        self.knight_animation.add_effect(animation.EffectAnimation(\"halo_explosion2\", frame_speed=0.1, life_span=10))",
-        "detail": "test",
         "documentation": {}
     }
 ]
