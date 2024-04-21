@@ -67,6 +67,22 @@
         "documentation": {}
     },
     {
+        "label": "Background",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "UNIT",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
         "label": "random",
         "kind": 6,
         "isExtraImport": true,
@@ -169,14 +185,6 @@
         "description": "game_element.bullet",
         "isExtraImport": true,
         "detail": "game_element.bullet",
-        "documentation": {}
-    },
-    {
-        "label": "UNIT",
-        "importPath": "game_element",
-        "description": "game_element",
-        "isExtraImport": true,
-        "detail": "game_element",
         "documentation": {}
     },
     {
@@ -328,7 +336,7 @@
         "kind": 6,
         "importPath": "game_element.character",
         "description": "game_element.character",
-        "peekOfCode": "class Character(Entity):\n    def __init__(self, name, position, direction : str = \"left\"):\n        \"\"\"\n        ['knight_m', 'wizzard_m', 'lizard_m', 'elf_m']\n        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]\n        \"\"\"\n        character_infor = DATA.get_character_info(name)\n        super().__init__(animation.CharacterAnimation(character_infor['name'], position, character_infor['frame_speed']))\n        self.__max_hp = character_infor['max_hp']\n        self.__hp = character_infor['max_hp']",
+        "peekOfCode": "class Character(Entity):\n    def __init__(self, name, position, direction : str = \"left\"):\n        \"\"\"\n        ['knight_m', 'wizzard_m', 'lizard_m', 'elf_m']\n        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]\n        \"\"\"\n        self.character_infor = DATA.get_character_info(name)\n        super().__init__(animation.CharacterAnimation(self.character_infor['name'], position, self.character_infor['frame_speed']))\n        self.__max_hp = self.character_infor['max_hp']\n        self.__hp = self.character_infor['max_hp']",
         "detail": "game_element.character",
         "documentation": {}
     },
@@ -391,7 +399,7 @@
         "kind": 6,
         "importPath": "game_element.weapon",
         "description": "game_element.weapon",
-        "peekOfCode": "class Weapon(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['knife', 'rusty_sword', 'regular_sword', 'red_gem_sword', 'big_hammer', 'hammer', 'baton_with_spikes', 'mace', 'katana', 'saw_sword', 'anime_sword', 'axe', 'machete', 'cleaver', 'duel_sword', 'knight_sword', 'golden_sword', 'lavish_sword', 'red_magic_staff', 'green_magic_staff', 'spear', 'purple_staff', 'thunder_staff', 'bow', 'holy_sword', 'fire_sword', 'ice_sword', 'grass_sword', 'iron_sword']\n        \"\"\"\n        weapon_infor = DATA.get_weapon_info(name)\n        super().__init__(animation.WeaponAnimation(weapon_infor['name'], position, weapon_infor['frame_speed']))\n        self.dame = weapon_infor['dame']\n        self.range = weapon_infor['range']\n        self.speed_attack = weapon_infor['speed_attack']",
+        "peekOfCode": "class Weapon(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['axe', 'bow', 'holy_sword', 'ice_sword', 'purple_staff']\n        \"\"\"\n        weapon_infor = DATA.get_weapon_info(name)\n        super().__init__(animation.WeaponAnimation(weapon_infor['name'], position, weapon_infor['frame_speed']))\n        self.dame = weapon_infor['dame']\n        self.range = weapon_infor['range']\n        self.speed_attack = weapon_infor['speed_attack']",
         "detail": "game_element.weapon",
         "documentation": {}
     },
@@ -400,7 +408,7 @@
         "kind": 6,
         "importPath": "map.block",
         "description": "map.block",
-        "peekOfCode": "class Block():\n    def __init__(self, anim: animation.BackgroundAnimation):\n        self.anim = anim\n    def update(self, current_time: int):\n        self.anim.update(current_time)\n    def render(self, screen):\n        self.anim.render(screen)",
+        "peekOfCode": "class Block(Background):\n    def __init__(self, name, position):\n        super().__init__(name, position)",
         "detail": "map.block",
         "documentation": {}
     },
@@ -463,7 +471,7 @@
         "kind": 6,
         "importPath": "map.trap_block",
         "description": "map.trap_block",
-        "peekOfCode": "class TrapBlock(Block):\n    def __init__(self, position: tuple[int, int]):\n        super().__init__(animation.BackgroundAnimation(\"floor_spikes_anim\", position, 0.5))\n        self.enable = True\n    def update(self, current_time: int):\n        super().update(current_time)",
+        "peekOfCode": "class TrapBlock(Block):\n    def __init__(self, position: tuple[int, int]):\n        super().__init__(\"floor_spikes_anim\", position)\n        self.enable = True\n    def update(self, current_time: int):\n        super().update(current_time)",
         "detail": "map.trap_block",
         "documentation": {}
     },
@@ -472,7 +480,7 @@
         "kind": 6,
         "importPath": "game",
         "description": "game",
-        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...\n        # self.idle_characters = [Character(\"knight_m\", (100, 100), 100), Character(\"wizzard_m\", (200, 200), 100)]\n        self.idle_characters = []\n        self.effects = []",
+        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...\n        # self.idle_characters = [Character(\"knight_m\", (100, 100), 100), Character(\"wizzard_m\", (200, 200), 100)]\n        self.idle_characters = [Character(\"elf_m\", (100, 100), \"left\"), Character(\"knight_m\", (200, 200), \"left\")]\n        self.effects = []",
         "detail": "game",
         "documentation": {}
     },

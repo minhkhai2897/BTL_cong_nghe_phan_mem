@@ -2,7 +2,6 @@ import pygame
 from ._sprite import SPRITE
 from ._animation import Animation
 from ._effect_animation import EffectAnimation
-from ._weapon_animation import WeaponAnimation
 
 class CharacterAnimation(Animation):
     def __init__(self, name: str, position : tuple[float, float] = (0, 0), frame_speed : float = 0.1):
@@ -19,7 +18,6 @@ class CharacterAnimation(Animation):
         state_list = SPRITE.get_characters(name)
         super().__init__(state_list, position, frame_speed)
         self.__effects = []
-        self.__weapon = None
         self._name = name
         self.__left = False
         self.__right = False
@@ -27,17 +25,6 @@ class CharacterAnimation(Animation):
     def add_effect(self, effect: EffectAnimation):
         """ Thêm hiệu ứng cho nhân vật."""
         self.__effects.append(effect)
-
-    def add_weapon(self, weapon : WeaponAnimation):
-        """ Thêm vũ khí cho nhân vật."""
-        if (self.__weapon is None):
-            self.__weapon = weapon
-    
-    def has_weapon(self):
-        """ Kiểm tra nhân vật có vũ khí không."""
-        if (self.__weapon is None):
-            return False
-        return True
 
     def __remove_effect_end(self):
         """ Xóa hiệu ứng sau khi đã chạy đủ life_span. """
@@ -47,8 +34,6 @@ class CharacterAnimation(Animation):
         """ Cập nhật hình ảnh hiện tại và các hiệu ứng của nhân vật."""
         super().update(current_time)
         self.__update_state()
-        if not self.__weapon is None:
-            self.__weapon.update(current_time)
         for effect in self.__effects:
             effect.update(current_time)
         self.__remove_effect_end()
@@ -56,20 +41,13 @@ class CharacterAnimation(Animation):
     def __update_state(self):
         if self.__left:
             self.set_state("run_anim_left")
-            self.__update_weapon_state("left")
         elif self.__right:
             self.set_state("run_anim_right")
-            self.__update_weapon_state("right")
-
-    def __update_weapon_state(self, direction : str):
-        if not self.__weapon is None:
-            self.__weapon.set_state(direction)
 
     def render(self, screen: pygame.surface.Surface, hp, max_hp):
         """ Hiển thị hình ảnh hiện tại lên màn hình và các hiệu ứng của nhân vật."""
         super().render(screen)
         self.__render_hp(screen, hp, max_hp)
-        self.__render_weapon(screen)
         self.__render_effects(screen)
 
     def __render_effects(self, screen: pygame.surface.Surface):
@@ -107,12 +85,6 @@ class CharacterAnimation(Animation):
                 start_pos = (self.get_position()[0] + ((self._current_img.get_width() - LENGTH) / 2), self.get_position()[1] - DISTANCE_y * (z1))
                 end_pos = (start_pos[0] + (LENGTH * z2 / max_hp), start_pos[1])
                 pygame.draw.line(screen, (0, 0, 255), start_pos, end_pos, 2)
-
-    def __render_weapon(self, screen):
-        if (self.__weapon is None):
-            return
-        self.__weapon.set_center(self.get_center())
-        self.__weapon.render(screen)
             
     def set_state(self, state: str):
         """

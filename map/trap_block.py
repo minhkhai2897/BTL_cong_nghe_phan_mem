@@ -3,7 +3,7 @@ from .block import Block
 
 class TrapBlock(Block):
     def __init__(self, position: tuple[int, int]):
-        super().__init__(animation.BackgroundAnimation("floor_spikes_anim", position, 0.5))
+        super().__init__("floor_spikes_anim", position)
         self.enable = True
 
     def update(self, current_time: int):

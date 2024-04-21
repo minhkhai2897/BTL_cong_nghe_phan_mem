@@ -11,14 +11,16 @@ class Character(Entity):
 
         ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]
         """
-        character_infor = DATA.get_character_info(name)
-        super().__init__(animation.CharacterAnimation(character_infor['name'], position, character_infor['frame_speed']))
-        self.__max_hp = character_infor['max_hp']
-        self.__hp = character_infor['max_hp']
-        self.__dame = character_infor['dame']
-        self.__range = character_infor['range']
-        self.__speed_attack = character_infor['speed_attack']
+        self.character_infor = DATA.get_character_info(name)
+        super().__init__(animation.CharacterAnimation(self.character_infor['name'], position, self.character_infor['frame_speed']))
+        self.__max_hp = self.character_infor['max_hp']
+        self.__hp = self.character_infor['max_hp']
+        self.__dame = self.character_infor['dame']
+        self.__range = self.character_infor['range']
+        self.__speed_attack = self.character_infor['speed_attack']
         self.__direction = direction
+        self.__weapon = None
+        self.__effect = []
 
     def change_direction(self, direction):
         if (direction in ["left", "right", "up", "down"]):
@@ -39,18 +41,26 @@ class Character(Entity):
 
     def update(self, current_time):
         self.anim.update(current_time)
+        if (self.__weapon != None):
+            self.__weapon.set_center(self.get_center())
+            self.__weapon.update(current_time)
+        for effect in self.__effect:
+            effect.set_center(self.get_center())
+            effect.update(current_time)
+            if (effect.is_end()):
+                self.__effect.remove(effect)
 
     def render(self, screen):
         self.anim.render(screen, self.__hp, self.__max_hp)
+        if (self.__weapon != None):
+            self.__weapon.render(screen)
+        for effect in self.__effect:
+            effect.render(screen)
 
     def move(self, dx, dy):
         self.anim.move(dx, dy)
 
-    def add_weapon(self, weapon : Weapon):
-        self.__get_buff_weapon(weapon)
-        self.anim.add_weapon(weapon.anim)
-
-    def __get_buff_weapon(self, weapon : Weapon):
+    def __add_weapon_buff(self, weapon : Weapon):
         self.__range += weapon.range
         self.__dame += weapon.dame
         self.__speed_attack += weapon.speed_attack
@@ -59,7 +69,17 @@ class Character(Entity):
         self.anim.add_effect(effect)
 
     def has_weapon(self):
-        return self.anim.has_weapon()
+        """ Kiểm tra nhân vật có vũ khí không."""
+        if (self.__weapon is None):
+            return False
+        return True
+    
+    def add_weapon(self, weapon : Weapon) -> bool:
+        if (self.__weapon is None) and (weapon.get_name() in self.character_infor['weapons']):
+            self.__weapon = weapon
+            self.__add_weapon_buff(weapon)
+            return True
+        return False
     
     def get_range(self):
         return self.__range

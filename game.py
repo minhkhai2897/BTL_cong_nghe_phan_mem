@@ -18,11 +18,11 @@ class Game:
 
         self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...
         # self.idle_characters = [Character("knight_m", (100, 100), 100), Character("wizzard_m", (200, 200), 100)]
-        self.idle_characters = []
+        self.idle_characters = [Character("elf_m", (100, 100), "left"), Character("knight_m", (200, 200), "left")]
         self.effects = []
         self.items = []
         self.bullets = []
-        self.weapons = []
+        self.weapons = [Weapon("holy_sword", (500, 500))]
         self.enemies = []
         self.players = [Snake()]
 
@@ -123,14 +123,9 @@ class Game:
             for weapon in self.weapons:
                 if (player[0].check_collision(weapon)):
                     for character in characters:
-                        if character.has_weapon():
-                            continue
-                        if (character.get_name() in ("knight_m", "knight_f")) and (weapon.get_name() in ("katana")):
-                            character.add_weapon(weapon)
+                        if (character.add_weapon(weapon)):
                             self.weapons.remove(weapon)
-                            # thêm xử lý ...buff, ...
                             break
-                        # if ...
 
     def handle_collision_players_and_characters(self):
         for player in self.players:

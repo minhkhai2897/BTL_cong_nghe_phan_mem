@@ -11,6 +11,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(['holy_sword', 'ice_sword']),
             },
             'wizzard_m': {
                 'name': 'wizzard_m',
@@ -20,6 +21,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(['purple_staff']),
             },
             'lizard_m': {
                 'name': 'lizard_m',
@@ -29,6 +31,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(['axe']),
             },
             'elf_m': {
                 'name': 'elf_m',
@@ -38,6 +41,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(['bow']),
             },
             'big_demon': {
                 'name': 'big_demon',
@@ -47,6 +51,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'ogre': {
                 'name': 'ogre',
@@ -56,6 +61,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'big_zombie': {
                 'name': 'big_zombie',
@@ -65,6 +71,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'chort': {
                 'name': 'chort',
@@ -74,6 +81,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'wogol': {
                 'name': 'wogol',
@@ -83,6 +91,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'necromancer': {
                 'name': 'necromancer',
@@ -92,6 +101,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'orc_shaman': {
                 'name': 'orc_shaman',
@@ -101,6 +111,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'orc_warrior': {
                 'name': 'orc_warrior',
@@ -110,6 +121,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'masked_orc': {
                 'name': 'masked_orc',
@@ -119,6 +131,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'ice_zombie': {
                 'name': 'ice_zombie',
@@ -128,6 +141,7 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
             'zombie': {
                 'name': 'zombie',
@@ -137,18 +151,11 @@ class Data:
                 'range': 100,
                 'speed_attack': 1,
                 'frame_speed': 0.1,
+                'weapons': set(),
             },
         }
         
-        self.__weapon_info = {
-        # ['knife', 'rusty_sword', 'regular_sword', 'red_gem_sword', 'big_hammer', 'hammer', 'baton_with_spikes', 'mace', 'katana', 'saw_sword', 'anime_sword', 'axe', 'machete', 'cleaver', 'duel_sword', 'knight_sword', 'golden_sword', 'lavish_sword', 'red_magic_staff', 'green_magic_staff', 'spear', 'purple_staff', 'thunder_staff', 'bow', 'holy_sword', 'fire_sword', 'ice_sword', 'grass_sword', 'iron_sword']
-            'sword': {
-                'name': 'sword',
-                'dame': 10,
-                'range': 10,
-                'speed_attack': 1,
-                'frame_speed': 0.1,
-            },
+        self.__weapon_info = {            
             'axe': {
                 'name': 'axe',
                 'dame': 20,
@@ -189,12 +196,135 @@ class Data:
         self.__item_info = {}
 
         self.__effect_info = {
-        # ['attack_up', 'blood1', 'blood2', 'blood3', 'blood4', 'bloodBound', 'clawfx', 'clawfx2', 'cross_hit', 'explosion2', 'fireball_explosion1', 'golden_cross_hit', 'halo_explosion1', 'halo_explosion2', 'holy_shield', 'hp_med', 'ice', 'iceShatter', 'purple_ball', 'purple_exp', 'shine', 'solidfx', 'solid_greenfx', 'swordfx', 'thunder', 'thunder_yellow']
             'attack_up': {
                 'name': 'attack_up',
                 'frame_speed': 0.1,
                 'life_span': 1,
-                
+            },
+            'blood1': {
+                'name': 'blood1',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'blood2': {
+                'name': 'blood2',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'blood3': {
+                'name': 'blood3',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'blood4': {
+                'name': 'blood4',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'bloodBound': {
+                'name': 'bloodBound',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'clawfx': {
+                'name': 'clawfx',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'clawfx2': {
+                'name': 'clawfx2',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'cross_hit': {
+                'name': 'cross_hit',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'explosion2': {
+                'name': 'explosion2',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'fireball_explosion1': {
+                'name': 'fireball_explosion1',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'golden_cross_hit': {
+                'name': 'golden_cross_hit',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'halo_explosion1': {
+                'name': 'halo_explosion1',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'halo_explosion2': {
+                'name': 'halo_explosion2',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'holy_shield': {
+                'name': 'holy_shield',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'hp_med': {
+                'name': 'hp_med',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'ice': {
+                'name': 'ice',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'iceShatter': {
+                'name': 'iceShatter',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'purple_ball': {
+                'name': 'purple_ball',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'purple_exp': {
+                'name': 'purple_exp',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'shine': {
+                'name': 'shine',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'solidfx': {
+                'name': 'solidfx',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'solid_greenfx': {
+                'name': 'solid_greenfx',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'swordfx': {
+                'name': 'swordfx',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'thunder': {
+                'name': 'thunder',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'thunder_yellow': {
+                'name': 'thunder_yellow',
+                'frame_speed': 0.1,
+                'life_span': 1,
             },
         }
 

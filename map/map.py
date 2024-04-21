@@ -42,7 +42,7 @@ class Map():
         for i in range(MAP_HEIGHT):
             for j in range(MAP_WIDTH):
                 if (has_map[i][j] == 1):
-                    map[i][j] = [Block(animation.BackgroundAnimation("floor_1", (j * 32, i * 32), 1))]
+                    map[i][j] = [Block("floor_1", (j * 32, i * 32))]
 
                 if (is_trap[i][j] == 1):
                     map[i][j] = [TrapBlock((j * 32, i * 32))]
@@ -149,17 +149,17 @@ class Map():
                     has_map[i * 2 + 1][j * 2] == 1 and is_trap[i * 2 + 1][j * 2] == 0 and
                     has_map[i * 2][j * 2 + 1] == 1 and is_trap[i * 2][j * 2 + 1] == 0 and
                     has_map[i * 2 + 1][j * 2 + 1] == 1 and is_trap[i * 2 + 1][j * 2 + 1] == 0): 
-                        map[i * 2][j * 2][0] = Block(animation.BackgroundAnimation("floor_6", (j * 32 * 2, i * 32 * 2), 1))
-                        map[i * 2 + 1][j * 2][0] = Block(animation.BackgroundAnimation("floor_7", (j * 32 * 2, i * 32 * 2 + 32), 1))
-                        map[i * 2][j * 2 + 1][0] = Block(animation.BackgroundAnimation("floor_4", (j * 32 * 2 + 32, i * 32 * 2), 1))
-                        map[i * 2 + 1][j * 2 + 1][0] = Block(animation.BackgroundAnimation("floor_8", (j * 32 * 2 + 32, i * 32 * 2 + 32), 1))
+                        map[i * 2][j * 2][0] = Block("floor_6", (j * 32 * 2, i * 32 * 2))
+                        map[i * 2 + 1][j * 2][0] = Block("floor_7", (j * 32 * 2, i * 32 * 2 + 32))
+                        map[i * 2][j * 2 + 1][0] = Block("floor_4", (j * 32 * 2 + 32, i * 32 * 2))
+                        map[i * 2 + 1][j * 2 + 1][0] = Block("floor_8", (j * 32 * 2 + 32, i * 32 * 2 + 32))
             else:
                 if (has_map[i * 2][j * 2] == 1 and is_trap[i * 2][j * 2] == 0 and
                     has_map[i * 2 + 1][j * 2] == 1 and is_trap[i * 2 + 1][j * 2] == 0 and
                     has_map[i * 2][j * 2 + 1] == 1 and is_trap[i * 2][j * 2 + 1] == 0):
-                        map[i * 2][j * 2][0] = Block(animation.BackgroundAnimation("floor_2", (j * 32 * 2, i * 32 * 2), 1))
-                        map[i * 2 + 1][j * 2][0] = Block(animation.BackgroundAnimation("floor_5", (j * 32 * 2, i * 32 * 2 + 32), 1))
-                        map[i * 2][j * 2 + 1][0] = Block(animation.BackgroundAnimation("floor_3", (j * 32 * 2 + 32, i * 32 * 2), 1))
+                        map[i * 2][j * 2][0] = Block("floor_2", (j * 32 * 2, i * 32 * 2))
+                        map[i * 2 + 1][j * 2][0] = Block("floor_5", (j * 32 * 2, i * 32 * 2 + 32))
+                        map[i * 2][j * 2 + 1][0] = Block("floor_3", (j * 32 * 2 + 32, i * 32 * 2))
 
     def __add_wall_around_map(self, map, has_map, width, height):
         for i in range(width):
@@ -167,48 +167,48 @@ class Map():
                 if has_map[j][i] == 0:
                     if (0 <= j + 1 < height and has_map[j + 1][i] == 1):
                         if (0 <= i + 1 < width and has_map[j][i + 1] == 1):
-                            map[j][i] = [Block(animation.BackgroundAnimation("wall_corner_front_right", (i * 32, j * 32), 1))]
-                            map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_corner_bottom_right", (i * 32, (j - 1) * 32), 1)))
+                            map[j][i] = [Block("wall_corner_front_right", (i * 32, j * 32))]
+                            map[j - 1][i].append(Block("wall_corner_bottom_right", (i * 32, (j - 1) * 32)))
                         elif (0 <= i - 1 < width and has_map[j][i - 1] == 1):
-                            map[j][i] = [Block(animation.BackgroundAnimation("wall_corner_front_left", (i * 32, j * 32), 1))]
-                            map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_corner_bottom_left", (i * 32, (j - 1) * 32), 1)))
+                            map[j][i] = [Block("wall_corner_front_left", (i * 32, j * 32))]
+                            map[j - 1][i].append(Block("wall_corner_bottom_left", (i * 32, (j - 1) * 32)))
                         else:
                             p = random.randint(0, 100)
-                            if (p < 5): map[j][i] = [Block(animation.BackgroundAnimation("wall_hole_1", (i * 32, j * 32), 1))]
-                            elif (p < 10): map[j][i] = [Block(animation.BackgroundAnimation("wall_hole_2", (i * 32, j * 32), 1))]
-                            else: map[j][i] = [Block(animation.BackgroundAnimation("wall_mid", (i * 32, j * 32), 1))]
-                            map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_top_mid", (i * 32, (j - 1) * 32), 1)))
+                            if (p < 5): map[j][i] = [Block("wall_hole_1", (i * 32, j * 32))]
+                            elif (p < 10): map[j][i] = [Block("wall_hole_2", (i * 32, j * 32))]
+                            else: map[j][i] = [Block("wall_mid", (i * 32, j * 32))]
+                            map[j - 1][i].append(Block("wall_top_mid", (i * 32, (j - 1) * 32)))
                     if (0 <= j - 1 < height and has_map[j - 1][i]):
                         p = random.randint(0, 100)
-                        if (p < 5): map[j][i] = [Block(animation.BackgroundAnimation("wall_hole_1", (i * 32, j * 32), 1))]
-                        elif (p < 10): map[j][i] = [Block(animation.BackgroundAnimation("wall_hole_2", (i * 32, j * 32), 1))]
-                        else: map[j][i] = [Block(animation.BackgroundAnimation("wall_mid", (i * 32, j * 32), 1))]
+                        if (p < 5): map[j][i] = [Block("wall_hole_1", (i * 32, j * 32))]
+                        elif (p < 10): map[j][i] = [Block("wall_hole_2", (i * 32, j * 32))]
+                        else: map[j][i] = [Block("wall_mid", (i * 32, j * 32))]
 
                         if has_map[j][i - 1]:
-                            map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_corner_top_left", (i * 32, (j - 1) * 32), 1)))
+                            map[j - 1][i].append(Block("wall_corner_top_left", (i * 32, (j - 1) * 32)))
                         elif has_map[j][i + 1]:
-                            map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_corner_top_right", (i * 32, (j - 1) * 32), 1)))
+                            map[j - 1][i].append(Block("wall_corner_top_right", (i * 32, (j - 1) * 32)))
                         else:
-                            map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_top_mid", (i * 32, (j - 1) * 32), 1)))
+                            map[j - 1][i].append(Block("wall_top_mid", (i * 32, (j - 1) * 32)))
                     if (0 <= i + 1 < width and has_map[j][i + 1]):
                         if 0 <= j + 1 < height and has_map[j + 1][i]:
                             pass
                         else:
-                            map[j][i].append(Block(animation.BackgroundAnimation("wall_side_mid_left", (i * 32, j * 32), 1)))
+                            map[j][i].append(Block("wall_side_mid_left", (i * 32, j * 32)))
                             if not has_map[j + 1][i + 1]:
-                                map[j + 1][i].append(Block(animation.BackgroundAnimation("wall_side_front_left", (i * 32, (j + 1) * 32), 1)))
+                                map[j + 1][i].append(Block("wall_side_front_left", (i * 32, (j + 1) * 32)))
                             if not has_map[j - 1][i + 1]:
-                                map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_side_mid_left", (i * 32, (j - 1) * 32), 1)))
-                                map[j - 2][i].append(Block(animation.BackgroundAnimation("wall_side_top_left", (i * 32, (j - 2) * 32), 1)))
+                                map[j - 1][i].append(Block("wall_side_mid_left", (i * 32, (j - 1) * 32)))
+                                map[j - 2][i].append(Block("wall_side_top_left", (i * 32, (j - 2) * 32)))
                     if 0 <= i - 1 < width and has_map[j][i - 1]:
                         if 0 <= j + 1 < height and has_map[j + 1][i]:
                             pass
                         else:
-                            map[j][i].append(Block(animation.BackgroundAnimation("wall_side_mid_right", (i * 32, j * 32), 1)))
+                            map[j][i].append(Block("wall_side_mid_right", (i * 32, j * 32)))
                             if not has_map[j + 1][i - 1]:
-                                map[j + 1][i].append(Block(animation.BackgroundAnimation("wall_side_front_right", (i * 32, (j + 1) * 32), 1)))
+                                map[j + 1][i].append(Block("wall_side_front_right", (i * 32, (j + 1) * 32)))
                             if not has_map[j - 1][i - 1]:
-                                map[j - 1][i].append(Block(animation.BackgroundAnimation("wall_side_mid_right", (i * 32, (j - 1) * 32), 1)))
-                                map[j - 2][i].append(Block(animation.BackgroundAnimation("wall_side_top_right", (i * 32, (j - 2) * 32), 1)))
+                                map[j - 1][i].append(Block("wall_side_mid_right", (i * 32, (j - 1) * 32)))
+                                map[j - 2][i].append(Block("wall_side_top_right", (i * 32, (j - 2) * 32)))
         
         

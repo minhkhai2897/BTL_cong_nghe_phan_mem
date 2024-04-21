@@ -1,11 +1,5 @@
-import animation
+from game_element import Background
 
-class Block():
-    def __init__(self, anim: animation.BackgroundAnimation):
-        self.anim = anim
-
-    def update(self, current_time: int):
-        self.anim.update(current_time)
-
-    def render(self, screen):
-        self.anim.render(screen)
+class Block(Background):
+    def __init__(self, name, position):
+        super().__init__(name, position)
