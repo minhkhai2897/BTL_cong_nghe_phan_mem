@@ -1,6 +1,7 @@
 import pygame
 
 SCALE_RATIO = 2
+UNIT = SCALE_RATIO * 16
 
 class ImageProcessor:
     @staticmethod

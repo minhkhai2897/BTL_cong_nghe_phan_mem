@@ -4,8 +4,8 @@ from .character import Character
 
 class Snake():
     def __init__(self, speed = 2):
-        self.__list = [Character('knight_m', (500, 500), 100), Character('knight_m', (532, 500), 100),
-                       Character('knight_m', (564, 500), 100), Character('knight_m', (596, 500), 100)]
+        self.__list = [Character('knight_m', (500, 500)), Character('knight_m', (532, 500)),
+                       Character('knight_m', (564, 500)), Character('knight_m', (596, 500))]
         self.speed = speed
         self.distance_between_characters = 32 + self.speed
         self.__live = True

@@ -17,12 +17,12 @@ class Game:
         self.is_running = True
 
         self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...
-        self.idle_characters = [Character("knight_m", (100, 100), 100), Character("wizzard_m", (200, 200), 100)]
-        
-        self.effects = [Effect("thunder", (300, 300), 5), Effect("thunder", (400, 400), 1)]
-        self.items = [Item("chest_empty_open_anim", (500, 500)), Item("chest_full_open_anim", (600, 600)), Item("ui_heart_full", (700, 700))]
-        self.bullets = [Bullet("arrow", (500, 500), angle=270), Bullet("axe", (750, 750)), Bullet("fireball", (550, 550)), Bullet("ice_pick", (450, 450))]
-        self.weapons = [Weapon("katana", (50, 50)), Weapon("katana", (50, 200)), Weapon("purple_staff", (150, 150)), Weapon("thunder_staff", (250, 250))]
+        # self.idle_characters = [Character("knight_m", (100, 100), 100), Character("wizzard_m", (200, 200), 100)]
+        self.idle_characters = []
+        self.effects = []
+        self.items = []
+        self.bullets = []
+        self.weapons = []
         self.enemies = []
         self.players = [Snake()]
 

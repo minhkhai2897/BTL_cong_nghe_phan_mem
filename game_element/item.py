@@ -1,6 +1,7 @@
 import pygame
 import animation
 from .entity import Entity
+from .data import DATA
 
 class Item(Entity):
     def __init__(self, name, position):
@@ -12,7 +13,8 @@ class Item(Entity):
         ['skull', 'crate', 'coin_anim']
 
         ['ui_heart_full', 'ui_heart_half', 'ui_heart_empty']"""
-        super().__init__(animation.ItemAnimation(name, position))
+        item_infor = DATA.get_item_info(name)
+        super().__init__(animation.ItemAnimation(item_infor['name'], position, item_infor['frame_speed']))
     
     def update(self, current_time):
         self.anim.update(current_time)

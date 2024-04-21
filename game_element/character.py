@@ -2,22 +2,23 @@ import pygame
 import animation
 from game_element.weapon import Weapon
 from .entity import Entity
+from .data import DATA
 
 class Character(Entity):
-    def __init__(self, name, position, max_hp):
+    def __init__(self, name, position, direction : str = "left"):
         """
-        ['knight_m', 'knight_f', 'wizzard_m', 'wizzard_f', 'lizard_m', 'lizard_f', 'elf_m', 'elf_f']
+        ['knight_m', 'wizzard_m', 'lizard_m', 'elf_m']
 
-        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',
+        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]
         """
-        super().__init__(animation.CharacterAnimation(name, position))
-        self.__max_hp = max_hp
-        self.__hp = max_hp
-        
-        self.__dame = 1
-        self.__range = 100
-        self.__speed_attack = 1
-        self.__direction = "left"
+        character_infor = DATA.get_character_info(name)
+        super().__init__(animation.CharacterAnimation(character_infor['name'], position, character_infor['frame_speed']))
+        self.__max_hp = character_infor['max_hp']
+        self.__hp = character_infor['max_hp']
+        self.__dame = character_infor['dame']
+        self.__range = character_infor['range']
+        self.__speed_attack = character_infor['speed_attack']
+        self.__direction = direction
 
     def change_direction(self, direction):
         if (direction in ["left", "right", "up", "down"]):

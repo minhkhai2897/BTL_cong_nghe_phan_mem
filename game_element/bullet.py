@@ -2,6 +2,7 @@ import pygame
 import animation
 import math
 from .entity import Entity
+from .data import DATA
 
 class Bullet(Entity):
     def __init__(self, name, position, speed : float = 4, angle : float = 0):
@@ -10,7 +11,8 @@ class Bullet(Entity):
         """
         self.__speed = speed
         self.__angle = angle * math.pi / 180
-        super().__init__(animation.BulletAnimation(name, position))
+        bullet_infor = DATA.get_bullet_info(name)
+        super().__init__(animation.BulletAnimation(bullet_infor['name'], position, bullet_infor['frame_speed']))
     
     def update(self, current_time):
         self.move()

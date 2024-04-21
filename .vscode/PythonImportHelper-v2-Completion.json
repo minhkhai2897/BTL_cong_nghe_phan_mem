@@ -43,6 +43,14 @@
         "documentation": {}
     },
     {
+        "label": "UNIT",
+        "importPath": "animation",
+        "description": "animation",
+        "isExtraImport": true,
+        "detail": "animation",
+        "documentation": {}
+    },
+    {
         "label": "Weapon",
         "importPath": "game_element.weapon",
         "description": "game_element.weapon",
@@ -85,6 +93,22 @@
     },
     {
         "label": "Map",
+        "importPath": "map",
+        "description": "map",
+        "isExtraImport": true,
+        "detail": "map",
+        "documentation": {}
+    },
+    {
+        "label": "SCREEN_WIDTH",
+        "importPath": "map",
+        "description": "map",
+        "isExtraImport": true,
+        "detail": "map",
+        "documentation": {}
+    },
+    {
+        "label": "SCREEN_HEIGHT",
         "importPath": "map",
         "description": "map",
         "isExtraImport": true,
@@ -145,6 +169,14 @@
         "description": "game_element.bullet",
         "isExtraImport": true,
         "detail": "game_element.bullet",
+        "documentation": {}
+    },
+    {
+        "label": "UNIT",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
         "documentation": {}
     },
     {
@@ -215,7 +247,16 @@
         "kind": 5,
         "importPath": "animation._helper",
         "description": "animation._helper",
-        "peekOfCode": "SCALE_RATIO = 2\nclass ImageProcessor:\n    @staticmethod\n    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:\n        new_images = tuple(ImageProcessor.process_image(image, flip, scaled) for image in images)\n        return new_images\n    @staticmethod\n    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:\n        new_image = image\n        if flip:",
+        "peekOfCode": "SCALE_RATIO = 2\nUNIT = SCALE_RATIO * 16\nclass ImageProcessor:\n    @staticmethod\n    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:\n        new_images = tuple(ImageProcessor.process_image(image, flip, scaled) for image in images)\n        return new_images\n    @staticmethod\n    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:\n        new_image = image",
+        "detail": "animation._helper",
+        "documentation": {}
+    },
+    {
+        "label": "UNIT",
+        "kind": 5,
+        "importPath": "animation._helper",
+        "description": "animation._helper",
+        "peekOfCode": "UNIT = SCALE_RATIO * 16\nclass ImageProcessor:\n    @staticmethod\n    def process_images(images: tuple[pygame.surface.Surface], flip: bool, scaled: float) -> tuple[pygame.surface.Surface]:\n        new_images = tuple(ImageProcessor.process_image(image, flip, scaled) for image in images)\n        return new_images\n    @staticmethod\n    def process_image(image: pygame.surface.Surface, flip: bool, scaled: float) -> pygame.surface.Surface:\n        new_image = image\n        if flip:",
         "detail": "animation._helper",
         "documentation": {}
     },
@@ -269,7 +310,7 @@
         "kind": 6,
         "importPath": "game_element.background",
         "description": "game_element.background",
-        "peekOfCode": "class Background(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['edge', 'hole']\n        ['column_top', 'column_mid', 'coulmn_base']\n        ['doors_all', 'doors_frame_left', 'doors_frame_top', 'doors_frame_righ', 'doors_leaf_closed', 'doors_leaf_open']\n        ['floor_1', 'floor_2', 'floor_3', 'floor_4', 'floor_5', 'floor_6', 'floor_7', 'floor_8', 'floor_ladder', 'floor_spikes_anim', 'floor_exit', 'floor_spike_disabled', 'floor_spike_enabled', 'floor_spike_out_ani', 'floor_spike_in_ani']\n        ['wall_top_left', 'wall_top_mid', 'wall_top_right', 'wall_left', 'wall_mid', 'wall_right', 'wall_fountain_top', 'wall_fountain_mid_red_anim', 'wall_fountain_basin_red_anim', 'wall_fountain_mid_blue_anim', 'wall_fountain_basin_blue_anim', 'wall_hole_1', 'wall_hole_2', 'wall_banner_red', 'wall_banner_blue', 'wall_banner_green', 'wall_banner_yellow', 'wall_column_top', 'wall_column_mid', 'wall_coulmn_base', 'wall_goo', 'wall_goo_base', 'wall_side_top_left', 'wall_side_top_right', 'wall_side_mid_left', 'wall_side_mid_right', 'wall_side_front_left', 'wall_side_front_right', 'wall_corner_top_left', 'wall_corner_top_right', 'wall_corner_left', 'wall_corner_right', 'wall_corner_bottom_left', 'wall_corner_bottom_right', 'wall_corner_front_left', 'wall_corner_front_right', 'wall_inner_corner_l_top_left', 'wall_inner_corner_l_top_rigth', 'wall_inner_corner_mid_left', 'wall_inner_corner_mid_rigth', 'wall_inner_corner_t_top_left', 'wall_inner_corner_t_top_rigth']\n        \"\"\"\n        super().__init__(animation.BackgroundAnimation(name, position))",
+        "peekOfCode": "class Background(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['edge', 'hole']\n        ['column_top', 'column_mid', 'coulmn_base']\n        ['doors_all', 'doors_frame_left', 'doors_frame_top', 'doors_frame_righ', 'doors_leaf_closed', 'doors_leaf_open']\n        ['floor_1', 'floor_2', 'floor_3', 'floor_4', 'floor_5', 'floor_6', 'floor_7', 'floor_8', 'floor_ladder', 'floor_spikes_anim', 'floor_exit', 'floor_spike_disabled', 'floor_spike_enabled', 'floor_spike_out_ani', 'floor_spike_in_ani']\n        ['wall_top_left', 'wall_top_mid', 'wall_top_right', 'wall_left', 'wall_mid', 'wall_right', 'wall_fountain_top', 'wall_fountain_mid_red_anim', 'wall_fountain_basin_red_anim', 'wall_fountain_mid_blue_anim', 'wall_fountain_basin_blue_anim', 'wall_hole_1', 'wall_hole_2', 'wall_banner_red', 'wall_banner_blue', 'wall_banner_green', 'wall_banner_yellow', 'wall_column_top', 'wall_column_mid', 'wall_coulmn_base', 'wall_goo', 'wall_goo_base', 'wall_side_top_left', 'wall_side_top_right', 'wall_side_mid_left', 'wall_side_mid_right', 'wall_side_front_left', 'wall_side_front_right', 'wall_corner_top_left', 'wall_corner_top_right', 'wall_corner_left', 'wall_corner_right', 'wall_corner_bottom_left', 'wall_corner_bottom_right', 'wall_corner_front_left', 'wall_corner_front_right', 'wall_inner_corner_l_top_left', 'wall_inner_corner_l_top_rigth', 'wall_inner_corner_mid_left', 'wall_inner_corner_mid_rigth', 'wall_inner_corner_t_top_left', 'wall_inner_corner_t_top_rigth']\n        \"\"\"\n        back_ground_info = DATA.get_background_info(name)",
         "detail": "game_element.background",
         "documentation": {}
     },
@@ -278,7 +319,7 @@
         "kind": 6,
         "importPath": "game_element.bullet",
         "description": "game_element.bullet",
-        "peekOfCode": "class Bullet(Entity):\n    def __init__(self, name, position, speed : float = 4, angle : float = 0):\n        \"\"\"\n        ['arrow', 'axe', 'fireball', 'ice_pick']\n        \"\"\"\n        self.__speed = speed\n        self.__angle = angle * math.pi / 180\n        super().__init__(animation.BulletAnimation(name, position))\n    def update(self, current_time):\n        self.move()",
+        "peekOfCode": "class Bullet(Entity):\n    def __init__(self, name, position, speed : float = 4, angle : float = 0):\n        \"\"\"\n        ['arrow', 'axe', 'fireball', 'ice_pick']\n        \"\"\"\n        self.__speed = speed\n        self.__angle = angle * math.pi / 180\n        bullet_infor = DATA.get_bullet_info(name)\n        super().__init__(animation.BulletAnimation(bullet_infor['name'], position, bullet_infor['frame_speed']))\n    def update(self, current_time):",
         "detail": "game_element.bullet",
         "documentation": {}
     },
@@ -287,8 +328,26 @@
         "kind": 6,
         "importPath": "game_element.character",
         "description": "game_element.character",
-        "peekOfCode": "class Character(Entity):\n    def __init__(self, name, position, max_hp):\n        \"\"\"\n        ['knight_m', 'knight_f', 'wizzard_m', 'wizzard_f', 'lizard_m', 'lizard_f', 'elf_m', 'elf_f']\n        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',\n        \"\"\"\n        super().__init__(animation.CharacterAnimation(name, position))\n        self.__max_hp = max_hp\n        self.__hp = max_hp\n        self.__dame = 1",
+        "peekOfCode": "class Character(Entity):\n    def __init__(self, name, position, direction : str = \"left\"):\n        \"\"\"\n        ['knight_m', 'wizzard_m', 'lizard_m', 'elf_m']\n        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]\n        \"\"\"\n        character_infor = DATA.get_character_info(name)\n        super().__init__(animation.CharacterAnimation(character_infor['name'], position, character_infor['frame_speed']))\n        self.__max_hp = character_infor['max_hp']\n        self.__hp = character_infor['max_hp']",
         "detail": "game_element.character",
+        "documentation": {}
+    },
+    {
+        "label": "Data",
+        "kind": 6,
+        "importPath": "game_element.data",
+        "description": "game_element.data",
+        "peekOfCode": "class Data:\n    def __init__(self):\n        self.__character_info = {\n            'knight_m': {\n                'name': 'knight_m',\n                'max_hp': 100,\n                'speed': 1,\n                'dame': 1,\n                'range': 100,\n                'speed_attack': 1,",
+        "detail": "game_element.data",
+        "documentation": {}
+    },
+    {
+        "label": "DATA",
+        "kind": 5,
+        "importPath": "game_element.data",
+        "description": "game_element.data",
+        "peekOfCode": "DATA = Data()",
+        "detail": "game_element.data",
         "documentation": {}
     },
     {
@@ -296,7 +355,7 @@
         "kind": 6,
         "importPath": "game_element.effect",
         "description": "game_element.effect",
-        "peekOfCode": "class Effect(Entity):\n    def __init__(self, name, position, life_span : int = 1):\n        \"\"\"\n        ['attack_up', 'blood1', 'blood2', 'blood3', 'blood4', 'bloodBound', 'clawfx', 'clawfx2', 'cross_hit', 'explosion2', 'fireball_explosion1', 'golden_cross_hit', 'halo_explosion1', 'halo_explosion2', 'holy_shield', 'hp_med', 'ice', 'iceShatter', 'purple_ball', 'purple_exp', 'shine', 'solidfx', 'solid_greenfx', 'swordfx', 'thunder', 'thunder_yellow']\n        \"\"\"\n        super().__init__(animation.EffectAnimation(name, position, frame_speed = 0.1, life_span=life_span))\n    def update(self, current_time):\n        self.anim.update(current_time)\n    def render(self, screen):\n        self.anim.render(screen)",
+        "peekOfCode": "class Effect(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['attack_up', 'blood1', 'blood2', 'blood3', 'blood4', 'bloodBound', 'clawfx', 'clawfx2', 'cross_hit', 'explosion2', 'fireball_explosion1', 'golden_cross_hit', 'halo_explosion1', 'halo_explosion2', 'holy_shield', 'hp_med', 'ice', 'iceShatter', 'purple_ball', 'purple_exp', 'shine', 'solidfx', 'solid_greenfx', 'swordfx', 'thunder', 'thunder_yellow']\n        \"\"\"\n        effect_infor = DATA.get_effect_info(name)\n        super().__init__(animation.EffectAnimation(effect_infor['name'], position, frame_speed = effect_infor['frame_speed'], life_span=effect_infor['life_span']))\n    def update(self, current_time):\n        self.anim.update(current_time)\n    def render(self, screen):",
         "detail": "game_element.effect",
         "documentation": {}
     },
@@ -314,7 +373,7 @@
         "kind": 6,
         "importPath": "game_element.item",
         "description": "game_element.item",
-        "peekOfCode": "class Item(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['chest_empty_open_anim', 'chest_full_open_anim', 'chest_mimic_open_anim']\n        ['flask_big_red', 'flask_big_blue', 'flask_big_green', 'flask_big_yellow', 'flask_red', 'flask_blue', 'flask_green', 'flask_yellow']\n        ['skull', 'crate', 'coin_anim']\n        ['ui_heart_full', 'ui_heart_half', 'ui_heart_empty']\"\"\"\n        super().__init__(animation.ItemAnimation(name, position))\n    def update(self, current_time):\n        self.anim.update(current_time)",
+        "peekOfCode": "class Item(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['chest_empty_open_anim', 'chest_full_open_anim', 'chest_mimic_open_anim']\n        ['flask_big_red', 'flask_big_blue', 'flask_big_green', 'flask_big_yellow', 'flask_red', 'flask_blue', 'flask_green', 'flask_yellow']\n        ['skull', 'crate', 'coin_anim']\n        ['ui_heart_full', 'ui_heart_half', 'ui_heart_empty']\"\"\"\n        item_infor = DATA.get_item_info(name)\n        super().__init__(animation.ItemAnimation(item_infor['name'], position, item_infor['frame_speed']))\n    def update(self, current_time):",
         "detail": "game_element.item",
         "documentation": {}
     },
@@ -323,7 +382,7 @@
         "kind": 6,
         "importPath": "game_element.snake",
         "description": "game_element.snake",
-        "peekOfCode": "class Snake():\n    def __init__(self, speed = 2):\n        self.__list = [Character('knight_m', (500, 500), 100), Character('knight_m', (532, 500), 100),\n                       Character('knight_m', (564, 500), 100), Character('knight_m', (596, 500), 100)]\n        self.speed = speed\n        self.distance_between_characters = 32 + self.speed\n        self.__live = True\n    def __getitem__(self, index: int):\n        return self.__list[index]\n    def add_character(self, name, position):",
+        "peekOfCode": "class Snake():\n    def __init__(self, speed = 2):\n        self.__list = [Character('knight_m', (500, 500)), Character('knight_m', (532, 500)),\n                       Character('knight_m', (564, 500)), Character('knight_m', (596, 500))]\n        self.speed = speed\n        self.distance_between_characters = 32 + self.speed\n        self.__live = True\n    def __getitem__(self, index: int):\n        return self.__list[index]\n    def add_character(self, name, position):",
         "detail": "game_element.snake",
         "documentation": {}
     },
@@ -332,7 +391,7 @@
         "kind": 6,
         "importPath": "game_element.weapon",
         "description": "game_element.weapon",
-        "peekOfCode": "class Weapon(Entity):\n    def __init__(self, name, position, dame : int = 0, range : int = 0, speed_attack : float = 0):\n        \"\"\"\n        ['knife', 'rusty_sword', 'regular_sword', 'red_gem_sword', 'big_hammer', 'hammer', 'baton_with_spikes', 'mace', 'katana', 'saw_sword', 'anime_sword', 'axe', 'machete', 'cleaver', 'duel_sword', 'knight_sword', 'golden_sword', 'lavish_sword', 'red_magic_staff', 'green_magic_staff', 'spear', 'purple_staff', 'thunder_staff', 'bow', 'holy_sword', 'fire_sword', 'ice_sword', 'grass_sword', 'iron_sword']\n        \"\"\"\n        super().__init__(animation.WeaponAnimation(name, position))\n        self.dame = dame\n        self.range = range\n        self.speed_attack = speed_attack\n    def update(self, current_time):",
+        "peekOfCode": "class Weapon(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['knife', 'rusty_sword', 'regular_sword', 'red_gem_sword', 'big_hammer', 'hammer', 'baton_with_spikes', 'mace', 'katana', 'saw_sword', 'anime_sword', 'axe', 'machete', 'cleaver', 'duel_sword', 'knight_sword', 'golden_sword', 'lavish_sword', 'red_magic_staff', 'green_magic_staff', 'spear', 'purple_staff', 'thunder_staff', 'bow', 'holy_sword', 'fire_sword', 'ice_sword', 'grass_sword', 'iron_sword']\n        \"\"\"\n        weapon_infor = DATA.get_weapon_info(name)\n        super().__init__(animation.WeaponAnimation(weapon_infor['name'], position, weapon_infor['frame_speed']))\n        self.dame = weapon_infor['dame']\n        self.range = weapon_infor['range']\n        self.speed_attack = weapon_infor['speed_attack']",
         "detail": "game_element.weapon",
         "documentation": {}
     },
@@ -350,7 +409,7 @@
         "kind": 5,
         "importPath": "map.helper",
         "description": "map.helper",
-        "peekOfCode": "SCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nSCALED_SIZE = animation.SCALE_RATIO * 16\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "peekOfCode": "SCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nMAP_WIDTH = SCREEN_WIDTH // UNIT\nMAP_HEIGHT = SCREEN_HEIGHT // UNIT",
         "detail": "map.helper",
         "documentation": {}
     },
@@ -359,16 +418,7 @@
         "kind": 5,
         "importPath": "map.helper",
         "description": "map.helper",
-        "peekOfCode": "SCREEN_HEIGHT = 896\nSCALED_SIZE = animation.SCALE_RATIO * 16\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
-        "detail": "map.helper",
-        "documentation": {}
-    },
-    {
-        "label": "SCALED_SIZE",
-        "kind": 5,
-        "importPath": "map.helper",
-        "description": "map.helper",
-        "peekOfCode": "SCALED_SIZE = animation.SCALE_RATIO * 16\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "peekOfCode": "SCREEN_HEIGHT = 896\nMAP_WIDTH = SCREEN_WIDTH // UNIT\nMAP_HEIGHT = SCREEN_HEIGHT // UNIT",
         "detail": "map.helper",
         "documentation": {}
     },
@@ -377,7 +427,7 @@
         "kind": 5,
         "importPath": "map.helper",
         "description": "map.helper",
-        "peekOfCode": "MAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "peekOfCode": "MAP_WIDTH = SCREEN_WIDTH // UNIT\nMAP_HEIGHT = SCREEN_HEIGHT // UNIT",
         "detail": "map.helper",
         "documentation": {}
     },
@@ -386,7 +436,7 @@
         "kind": 5,
         "importPath": "map.helper",
         "description": "map.helper",
-        "peekOfCode": "MAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE",
+        "peekOfCode": "MAP_HEIGHT = SCREEN_HEIGHT // UNIT",
         "detail": "map.helper",
         "documentation": {}
     },
@@ -422,53 +472,8 @@
         "kind": 6,
         "importPath": "game",
         "description": "game",
-        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...\n        self.idle_characters = [Character(\"knight_m\", (100, 100), 100), Character(\"wizzard_m\", (200, 200), 100)]\n        self.effects = [Effect(\"thunder\", (300, 300), 5), Effect(\"thunder\", (400, 400), 1)]\n        self.items = [Item(\"chest_empty_open_anim\", (500, 500)), Item(\"chest_full_open_anim\", (600, 600)), Item(\"ui_heart_full\", (700, 700))]",
+        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...\n        # self.idle_characters = [Character(\"knight_m\", (100, 100), 100), Character(\"wizzard_m\", (200, 200), 100)]\n        self.idle_characters = []\n        self.effects = []",
         "detail": "game",
-        "documentation": {}
-    },
-    {
-        "label": "SCREEN_WIDTH",
-        "kind": 5,
-        "importPath": "helper",
-        "description": "helper",
-        "peekOfCode": "SCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nSCALED_SIZE = 32\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
-        "detail": "helper",
-        "documentation": {}
-    },
-    {
-        "label": "SCREEN_HEIGHT",
-        "kind": 5,
-        "importPath": "helper",
-        "description": "helper",
-        "peekOfCode": "SCREEN_HEIGHT = 896\nSCALED_SIZE = 32\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
-        "detail": "helper",
-        "documentation": {}
-    },
-    {
-        "label": "SCALED_SIZE",
-        "kind": 5,
-        "importPath": "helper",
-        "description": "helper",
-        "peekOfCode": "SCALED_SIZE = 32\nMAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
-        "detail": "helper",
-        "documentation": {}
-    },
-    {
-        "label": "MAP_WIDTH",
-        "kind": 5,
-        "importPath": "helper",
-        "description": "helper",
-        "peekOfCode": "MAP_WIDTH = SCREEN_WIDTH // SCALED_SIZE\nMAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
-        "detail": "helper",
-        "documentation": {}
-    },
-    {
-        "label": "MAP_HEIGHT",
-        "kind": 5,
-        "importPath": "helper",
-        "description": "helper",
-        "peekOfCode": "MAP_HEIGHT = SCREEN_HEIGHT // SCALED_SIZE\nMAX_PALYERS_NUM = 2",
-        "detail": "helper",
         "documentation": {}
     },
     {
