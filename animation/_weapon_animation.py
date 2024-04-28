@@ -17,7 +17,7 @@ class WeaponAnimation(Animation):
             - right
         """
         super().set_state("weapon_" + self._name + "_" + state)
-    
+
     def _get_current_state(self) -> str:
         """ 
         Trả về tên của trạng thái hiện tại.

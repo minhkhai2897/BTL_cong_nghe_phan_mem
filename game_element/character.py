@@ -1,18 +1,22 @@
 import pygame
 import animation
-from game_element.weapon import Weapon
+from animation import UNIT
+from .weapon import Weapon
+from .effect import Effect
 from .entity import Entity
 from .data import DATA
+
 
 class Character(Entity):
     def __init__(self, name, position, direction : str = "left"):
         """
-        ['knight_m', 'wizzard_m', 'lizard_m', 'elf_m']
+        CHARACTER_LIST = ('knight_m', 'wizzard_m', 'lizard_m', 'elf_m')
 
         ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]
         """
+        
         self.character_infor = DATA.get_character_info(name)
-        super().__init__(animation.CharacterAnimation(self.character_infor['name'], position, self.character_infor['frame_speed']))
+        super().__init__(animation.CharacterAnimation(self.character_infor['name'], (position[0], position[1]), self.character_infor['frame_speed']))
         self.__max_hp = self.character_infor['max_hp']
         self.__hp = self.character_infor['max_hp']
         self.__dame = self.character_infor['dame']
@@ -20,7 +24,7 @@ class Character(Entity):
         self.__speed_attack = self.character_infor['speed_attack']
         self.__direction = direction
         self.__weapon = None
-        self.__effect = []
+        self.__effects = []
 
     def change_direction(self, direction):
         if (direction in ["left", "right", "up", "down"]):
@@ -38,26 +42,35 @@ class Character(Entity):
     def set_hp(self, hp):
         pass
 
-
     def update(self, current_time):
         self.anim.update(current_time)
         if (self.__weapon != None):
             self.__weapon.set_center(self.get_center())
             self.__weapon.update(current_time)
-        for effect in self.__effect:
-            effect.set_center(self.get_center())
-            effect.update(current_time)
+        for effect in self.__effects:
             if (effect.is_end()):
-                self.__effect.remove(effect)
+                self.__effects.remove(effect)
+            if (effect.get_name() == "thunder") or (effect.get_name() == "thunder_yellow"):
+                x = self.get_position()[0] + (self.get_width() - effect.get_width()) / 2
+                y = self.get_position()[1] - effect.get_height() + self.get_height() / 2
+                effect.set_position((x, y))
+            else:
+                effect.set_center(self.get_center())
+            effect.update(current_time)
 
     def render(self, screen):
         self.anim.render(screen, self.__hp, self.__max_hp)
         if (self.__weapon != None):
             self.__weapon.render(screen)
-        for effect in self.__effect:
+        for effect in self.__effects:
             effect.render(screen)
 
-    def move(self, dx, dy):
+    def move(self, speed):
+        dx, dy = 0, 0
+        if (self.__direction in ["left", "right"]):
+            dx = speed * (1 if self.__direction == "right" else -1)
+        else:
+            dy = speed * (1 if self.__direction == "down" else -1)
         self.anim.move(dx, dy)
 
     def __add_weapon_buff(self, weapon : Weapon):
@@ -65,8 +78,8 @@ class Character(Entity):
         self.__dame += weapon.dame
         self.__speed_attack += weapon.speed_attack
     
-    def add_effect(self, effect):
-        self.anim.add_effect(effect)
+    def add_effect(self, effect : Effect):
+        self.__effects.append(effect)
 
     def has_weapon(self):
         """ Kiểm tra nhân vật có vũ khí không."""

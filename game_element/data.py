@@ -1,3 +1,4 @@
+
 class Data:
     def __init__(self):
         
@@ -193,7 +194,19 @@ class Data:
             },
         }
 
-        self.__item_info = {}
+        self.__item_info = {
+            # ITEM_HP_MEDCINE, ITEM_HP_EXTRA_MEDCINE
+            'flask_big_red': {
+                'name': 'flask_big_red',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+            'flask_big_yellow': {
+                'name': 'flask_big_yellow',
+                'frame_speed': 0.1,
+                'life_span': 1,
+            },
+        }
 
         self.__effect_info = {
             'attack_up': {
@@ -434,6 +447,58 @@ class Data:
         self.__bullet_info = {
 
         }
+
+        
+        self.__snaker = {
+            'knight_m': {
+                'length': 4,
+            },
+            'wizzard_m': {
+                'length': 1,
+            },
+            'lizard_m': {
+                'length': 1,
+            },
+            'elf_m': {
+                'length': 1,
+            },
+            'big_demon': {
+                'length': 1,
+            },
+            'ogre': {
+                'length': 1,
+            },
+            'big_zombie': {
+                'length': 1,
+            },
+            'chort': {
+                'length': 1,
+            },
+            'wogol': {
+                'length': 1,
+            },
+            'necromancer': {
+                'length': 1,
+            },
+            'orc_shaman': {
+                'length': 1,
+            },
+            'orc_warrior': {
+                'length': 1,
+            },
+            'masked_orc': {
+                'length': 1,
+            },
+            'ice_zombie': {
+                'length': 1,
+            },
+            'zombie': {
+                'length': 1,
+            },
+        }
+
+    def get_snaker(self, name):
+        return self.__snaker[name]
 
     def get_character_info(self, name):
         return self.__character_info[name]

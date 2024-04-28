@@ -4,10 +4,11 @@ from map import Map
 from helper import SCREEN_WIDTH, SCREEN_HEIGHT
 from game_element.snake import Snake
 from game_element.character import Character
-from game_element.effect import Effect
+from game_element import Effect
 from game_element.item import Item
 from game_element.bullet import Bullet
-from game_element.weapon import Weapon
+from game_element import Weapon
+from animation._helper import UNIT
 
 class Game:
     def __init__(self):
@@ -17,14 +18,12 @@ class Game:
         self.is_running = True
 
         self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...
-        # self.idle_characters = [Character("knight_m", (100, 100), 100), Character("wizzard_m", (200, 200), 100)]
-        self.idle_characters = [Character("elf_m", (100, 100), "left"), Character("knight_m", (200, 200), "left")]
         self.effects = []
-        self.items = []
         self.bullets = []
-        self.weapons = [Weapon("holy_sword", (500, 500))]
         self.enemies = []
-        self.players = [Snake()]
+        self.players = [Snake("knight_m", (500, 500), "left", 2)]
+        self.current_time = 0
+        self.last_update_time = 0
 
     def run(self):
         while self.is_running:
@@ -43,18 +42,19 @@ class Game:
 
 
     def update(self):
+        self.current_time = pygame.time.get_ticks()
+        if (self.current_time - self.last_update_time > 10 * 1000):
+            self.last_update_time = self.current_time
+            self.map.add_new_idle_characters()
+            self.map.add_new_items()
+            self.map.add_new_weapons()
         self.map.update(pygame.time.get_ticks())
 
         
         # xử lý tương tác giữa các list đặt ở đây
         self.handle_collision_players_and_map()
-
-
-
-
-
-        self.handle_collision_players_and_weapons()
-        self.handle_collision_players_and_characters()
+        # self.handle_collision_players_and_weapons()
+        # self.handle_collision_players_and_characters()
 
 
 
@@ -71,14 +71,18 @@ class Game:
 
         for player in self.players:
             player.update(pygame.time.get_ticks())
-        for character in self.idle_characters:
-            character.update(pygame.time.get_ticks())
+        # update idle_characters
+        for x, y in self.map.idle_characters_positions:
+            self.map.idle_characters_map[y][x].update(pygame.time.get_ticks())
+        # update items
+        # for x, y in self.map.items_positions:
+        #     self.map.items_map[y][x].update(pygame.time.get_ticks())
+        # update weapons
+        # for x, y in self.map.weapons_positions:
+        #     self.map.weapons_map[y][x].update(pygame.time.get_ticks())
+
         for enemy in self.enemies:
             enemy.update(pygame.time.get_ticks())
-        for item in self.items:
-            item.update(pygame.time.get_ticks())
-        for weapon in self.weapons:
-            weapon.update(pygame.time.get_ticks())
         for bullet in self.bullets:
             bullet.update(pygame.time.get_ticks())
         for effect in self.effects:
@@ -89,16 +93,19 @@ class Game:
         self.screen.fill((0, 0, 0))
         
         self.map.render(self.screen)
-        for item in self.items:
-            item.render(self.screen)
+        # render weapons
+        for x, y in self.map.weapons_positions:
+            self.map.weapons_map[y][x].render(self.screen)
+        # render items
+        for x, y in self.map.items_positions:
+            self.map.items_map[y][x].render(self.screen)
         for player in self.players:
             player.render(self.screen)
-        for character in self.idle_characters:
-            character.render(self.screen)
+        # render idle_characters
+        for x, y in self.map.idle_characters_positions:
+            self.map.idle_characters_map[y][x].render(self.screen)
         for enemy in self.enemies:
             enemy.render(self.screen)
-        for weapon in self.weapons:
-            weapon.render(self.screen)
         for bullet in self.bullets:
             bullet.render(self.screen)
         for effect in self.effects:
@@ -112,28 +119,45 @@ class Game:
 
     def handle_collision_players_and_map(self):
         for player in self.players:
-            x = player[0].get_center()[0] // 32
-            y = player[0].get_center()[1] // 32
+            # xử lý va chạm với map
+            x = player[0].get_center()[0] // UNIT
+            y = player[0].get_center()[1] // UNIT
             if (not self.map.has_map[y][x]):
                 player.die()
 
-    def handle_collision_players_and_weapons(self):
-        for player in self.players:
-            characters = [character for character in player if not character.has_weapon()]
-            for weapon in self.weapons:
-                if (player[0].check_collision(weapon)):
-                    for character in characters:
-                        if (character.add_weapon(weapon)):
-                            self.weapons.remove(weapon)
-                            break
+            # xử lý va chạm với weapon
+            if self.map.weapons_map[y][x] is not None:
+                for character in player:
+                    if character.add_weapon(self.map.weapons_map[y][x]):
+                        self.map.remove_weapon(x, y)
+                        break
+            
+            # Xử lý va chạm với item
+            if self.map.items_map[y][x] is not None:
+                player.add_item(self.map.items_map[y][x])
+                self.map.remove_item(x, y)
 
-    def handle_collision_players_and_characters(self):
-        for player in self.players:
-            for character in self.idle_characters:
-                if (player[0].check_collision(character)):
-                    player.add_character(character)
-                    self.idle_characters.remove(character)
+            # Xử lý va chạm với idle character
+            if (player[0].get_direction() == "left"):
+                if not (self.map.idle_characters_map[y][x - 1] is None):
+                    player.add_character(self.map.idle_characters_map[y][x - 1])
+                    self.map.remove_idle_character(x - 1, y)
+            elif (player[0].get_direction() == "right"):
+                if not (self.map.idle_characters_map[y][x + 1] is None):
+                    player.add_character(self.map.idle_characters_map[y][x + 1])
+                    self.map.remove_idle_character(x + 1, y)
+            elif (player[0].get_direction() == "up"):
+                if not (self.map.idle_characters_map[y - 1][x] is None):
+                    player.add_character(self.map.idle_characters_map[y - 1][x])
+                    self.map.remove_idle_character(x, y - 1)
+            elif (player[0].get_direction() == "down"):
+                if not (self.map.idle_characters_map[y + 1][x] is None):
+                    player.add_character(self.map.idle_characters_map[y + 1][x])
+                    self.map.remove_idle_character(x, y + 1)
 
+
+    def reset(self):
+        pass
                             
 
 if __name__ == "__main__":

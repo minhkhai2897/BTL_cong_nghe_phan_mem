@@ -17,26 +17,15 @@ class CharacterAnimation(Animation):
         """
         state_list = SPRITE.get_characters(name)
         super().__init__(state_list, position, frame_speed)
-        self.__effects = []
+        # self.__effects = []
         self._name = name
         self.__left = False
         self.__right = False
-
-    def add_effect(self, effect: EffectAnimation):
-        """ Thêm hiệu ứng cho nhân vật."""
-        self.__effects.append(effect)
-
-    def __remove_effect_end(self):
-        """ Xóa hiệu ứng sau khi đã chạy đủ life_span. """
-        self.__effects = [effect for effect in self.__effects if not effect.is_end()]
 
     def update(self, current_time: int):
         """ Cập nhật hình ảnh hiện tại và các hiệu ứng của nhân vật."""
         super().update(current_time)
         self.__update_state()
-        for effect in self.__effects:
-            effect.update(current_time)
-        self.__remove_effect_end()
 
     def __update_state(self):
         if self.__left:
@@ -48,19 +37,18 @@ class CharacterAnimation(Animation):
         """ Hiển thị hình ảnh hiện tại lên màn hình và các hiệu ứng của nhân vật."""
         super().render(screen)
         self.__render_hp(screen, hp, max_hp)
-        self.__render_effects(screen)
 
-    def __render_effects(self, screen: pygame.surface.Surface):
-        """ Hiển thị các hiệu ứng của nhân vật."""
-        for effect in self.__effects:
-            if (effect.get_name() == "thunder") or (effect.get_name() == "thunder_yellow"):
-                x = self.get_position()[0] + (self._current_img.get_width() - effect.get_width()) / 2
-                y = self.get_position()[1] - effect.get_height() + self.get_height() / 2
-                effect.set_position((x, y))
-                effect.render(screen)
-            else:
-                effect.set_center(self.get_center())
-                effect.render(screen)
+    # def __render_effects(self, screen: pygame.surface.Surface):
+    #     """ Hiển thị các hiệu ứng của nhân vật."""
+    #     for effect in self.__effects:
+    #         if (effect.get_name() == "thunder") or (effect.get_name() == "thunder_yellow"):
+    #             x = self.get_position()[0] + (self._current_img.get_width() - effect.get_width()) / 2
+    #             y = self.get_position()[1] - effect.get_height() + self.get_height() / 2
+    #             effect.set_position((x, y))
+    #             effect.render(screen)
+    #         else:
+    #             effect.set_center(self.get_center())
+    #             effect.render(screen)
 
     def __render_hp(self, screen: pygame.surface.Surface, hp: int, max_hp: int):
         """ Hiển thị thanh máu của nhân vật."""

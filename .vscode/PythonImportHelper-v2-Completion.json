@@ -51,23 +51,111 @@
         "documentation": {}
     },
     {
-        "label": "Weapon",
-        "importPath": "game_element.weapon",
-        "description": "game_element.weapon",
+        "label": "UNIT",
+        "importPath": "animation",
+        "description": "animation",
         "isExtraImport": true,
-        "detail": "game_element.weapon",
+        "detail": "animation",
         "documentation": {}
     },
     {
-        "label": "Weapon",
-        "importPath": "game_element.weapon",
-        "description": "game_element.weapon",
+        "label": "UNIT",
+        "importPath": "animation",
+        "description": "animation",
         "isExtraImport": true,
-        "detail": "game_element.weapon",
+        "detail": "animation",
+        "documentation": {}
+    },
+    {
+        "label": "UNIT",
+        "importPath": "animation._helper",
+        "description": "animation._helper",
+        "isExtraImport": true,
+        "detail": "animation._helper",
+        "documentation": {}
+    },
+    {
+        "label": "UNIT",
+        "importPath": "animation._helper",
+        "description": "animation._helper",
+        "isExtraImport": true,
+        "detail": "animation._helper",
+        "documentation": {}
+    },
+    {
+        "label": "UNIT",
+        "importPath": "animation._helper",
+        "description": "animation._helper",
+        "isExtraImport": true,
+        "detail": "animation._helper",
         "documentation": {}
     },
     {
         "label": "Background",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "Character",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "Weapon",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "Item",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "IDLE_CHARACTER_LIST",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "ITEM_LIST",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "WEAPON_LIST",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "Effect",
+        "importPath": "game_element",
+        "description": "game_element",
+        "isExtraImport": true,
+        "detail": "game_element",
+        "documentation": {}
+    },
+    {
+        "label": "Weapon",
         "importPath": "game_element",
         "description": "game_element",
         "isExtraImport": true,
@@ -161,14 +249,6 @@
         "description": "game_element.character",
         "isExtraImport": true,
         "detail": "game_element.character",
-        "documentation": {}
-    },
-    {
-        "label": "Effect",
-        "importPath": "game_element.effect",
-        "description": "game_element.effect",
-        "isExtraImport": true,
-        "detail": "game_element.effect",
         "documentation": {}
     },
     {
@@ -336,7 +416,7 @@
         "kind": 6,
         "importPath": "game_element.character",
         "description": "game_element.character",
-        "peekOfCode": "class Character(Entity):\n    def __init__(self, name, position, direction : str = \"left\"):\n        \"\"\"\n        ['knight_m', 'wizzard_m', 'lizard_m', 'elf_m']\n        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]\n        \"\"\"\n        self.character_infor = DATA.get_character_info(name)\n        super().__init__(animation.CharacterAnimation(self.character_infor['name'], position, self.character_infor['frame_speed']))\n        self.__max_hp = self.character_infor['max_hp']\n        self.__hp = self.character_infor['max_hp']",
+        "peekOfCode": "class Character(Entity):\n    def __init__(self, name, position, direction : str = \"left\"):\n        \"\"\"\n        CHARACTER_LIST = ('knight_m', 'wizzard_m', 'lizard_m', 'elf_m')\n        ['big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie',]\n        \"\"\"\n        self.character_infor = DATA.get_character_info(name)\n        super().__init__(animation.CharacterAnimation(self.character_infor['name'], (position[0], position[1]), self.character_infor['frame_speed']))\n        self.__max_hp = self.character_infor['max_hp']\n        self.__hp = self.character_infor['max_hp']",
         "detail": "game_element.character",
         "documentation": {}
     },
@@ -381,7 +461,7 @@
         "kind": 6,
         "importPath": "game_element.item",
         "description": "game_element.item",
-        "peekOfCode": "class Item(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        ['chest_empty_open_anim', 'chest_full_open_anim', 'chest_mimic_open_anim']\n        ['flask_big_red', 'flask_big_blue', 'flask_big_green', 'flask_big_yellow', 'flask_red', 'flask_blue', 'flask_green', 'flask_yellow']\n        ['skull', 'crate', 'coin_anim']\n        ['ui_heart_full', 'ui_heart_half', 'ui_heart_empty']\"\"\"\n        item_infor = DATA.get_item_info(name)\n        super().__init__(animation.ItemAnimation(item_infor['name'], position, item_infor['frame_speed']))\n    def update(self, current_time):",
+        "peekOfCode": "class Item(Entity):\n    def __init__(self, name, position):\n        \"\"\"\n        flask_big_red, flask_big_yellow\"\"\"\n        item_infor = DATA.get_item_info(name)\n        super().__init__(animation.ItemAnimation(item_infor['name'], position, item_infor['frame_speed']))\n    def update(self, current_time):\n        self.anim.update(current_time)\n    def render(self, screen):\n        self.anim.render(screen)",
         "detail": "game_element.item",
         "documentation": {}
     },
@@ -390,7 +470,7 @@
         "kind": 6,
         "importPath": "game_element.snake",
         "description": "game_element.snake",
-        "peekOfCode": "class Snake():\n    def __init__(self, speed = 2):\n        self.__list = [Character('knight_m', (500, 500)), Character('knight_m', (532, 500)),\n                       Character('knight_m', (564, 500)), Character('knight_m', (596, 500))]\n        self.speed = speed\n        self.distance_between_characters = 32 + self.speed\n        self.__live = True\n    def __getitem__(self, index: int):\n        return self.__list[index]\n    def add_character(self, name, position):",
+        "peekOfCode": "class Snake():\n    def __init__(self, name : str, position : tuple[int, int], direction, speed = 2):\n        \"\"\"\n        'knight_m', 'wizzard_m', 'lizard_m', 'elf_m','big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie'\n        \"\"\"\n        self.__distance_between_characters = UNIT # + self.speed\n        self.__list = self.__init_snake(name, position, direction)\n        self.speed = speed\n        self.__live = True\n    def __init_snake(self, name, position, direction):",
         "detail": "game_element.snake",
         "documentation": {}
     },
@@ -410,6 +490,33 @@
         "description": "map.block",
         "peekOfCode": "class Block(Background):\n    def __init__(self, name, position):\n        super().__init__(name, position)",
         "detail": "map.block",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_IDLE_CHARACTERS_NUM",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "MAX_IDLE_CHARACTERS_NUM = 10\nMAX_ITEMS_NUM = 5\nMAX_WEAPONS_NUM = 10\nSCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nMAP_WIDTH = SCREEN_WIDTH // UNIT\nMAP_HEIGHT = SCREEN_HEIGHT // UNIT",
+        "detail": "map.helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_ITEMS_NUM",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "MAX_ITEMS_NUM = 5\nMAX_WEAPONS_NUM = 10\nSCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nMAP_WIDTH = SCREEN_WIDTH // UNIT\nMAP_HEIGHT = SCREEN_HEIGHT // UNIT",
+        "detail": "map.helper",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_WEAPONS_NUM",
+        "kind": 5,
+        "importPath": "map.helper",
+        "description": "map.helper",
+        "peekOfCode": "MAX_WEAPONS_NUM = 10\nSCREEN_WIDTH = 1440\nSCREEN_HEIGHT = 896\nMAP_WIDTH = SCREEN_WIDTH // UNIT\nMAP_HEIGHT = SCREEN_HEIGHT // UNIT",
+        "detail": "map.helper",
         "documentation": {}
     },
     {
@@ -453,7 +560,7 @@
         "kind": 6,
         "importPath": "map.map",
         "description": "map.map",
-        "peekOfCode": "class TileType(Enum):\n    FLOOR = 0\n    WALL = 1\n    SPIKE = 2\nclass Map():\n    def __init__(self):\n        self.__tuple, self.has_map, self.is_trap, self.__animated_block_positions = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):",
+        "peekOfCode": "class TileType(Enum):\n    FLOOR = 0\n    WALL = 1\n    SPIKE = 2\nclass Map():\n    def __init__(self):\n        self.__tuple, self.has_map, self.is_trap, self.__animated_block_positions = self.create_map()\n        self.idle_characters_map, self.idle_characters_positions = self.__generate_idle_characters(MAX_IDLE_CHARACTERS_NUM, MAP_WIDTH, MAP_HEIGHT)\n        self.items_map, self.items_positions = self.__generate_items(MAX_ITEMS_NUM, MAP_WIDTH, MAP_HEIGHT)\n        self.weapons_map, self.weapons_positions = self.__generate_weapons(MAX_WEAPONS_NUM, MAP_WIDTH, MAP_HEIGHT)",
         "detail": "map.map",
         "documentation": {}
     },
@@ -462,7 +569,7 @@
         "kind": 6,
         "importPath": "map.map",
         "description": "map.map",
-        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple, self.has_map, self.is_trap, self.__animated_block_positions = self.create_map()\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = self.generate_map()\n        return map\n    def update(self, current_time):\n        for position in self.__animated_block_positions:",
+        "peekOfCode": "class Map():\n    def __init__(self):\n        self.__tuple, self.has_map, self.is_trap, self.__animated_block_positions = self.create_map()\n        self.idle_characters_map, self.idle_characters_positions = self.__generate_idle_characters(MAX_IDLE_CHARACTERS_NUM, MAP_WIDTH, MAP_HEIGHT)\n        self.items_map, self.items_positions = self.__generate_items(MAX_ITEMS_NUM, MAP_WIDTH, MAP_HEIGHT)\n        self.weapons_map, self.weapons_positions = self.__generate_weapons(MAX_WEAPONS_NUM, MAP_WIDTH, MAP_HEIGHT)\n    def __getitem__(self, index: int):\n        return self.__tuple[index]\n    def create_map(self):\n        map = self.generate_map()",
         "detail": "map.map",
         "documentation": {}
     },
@@ -480,7 +587,7 @@
         "kind": 6,
         "importPath": "game",
         "description": "game",
-        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...\n        # self.idle_characters = [Character(\"knight_m\", (100, 100), 100), Character(\"wizzard_m\", (200, 200), 100)]\n        self.idle_characters = [Character(\"elf_m\", (100, 100), \"left\"), Character(\"knight_m\", (200, 200), \"left\")]\n        self.effects = []",
+        "peekOfCode": "class Game:\n    def __init__(self):\n        pygame.init()\n        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))\n        self.clock = pygame.time.Clock()\n        self.is_running = True\n        self.map = Map() # trong này sẽ có map hiện tại, và các mảng 2 chiều chứa vị trị đinh, ...\n        self.effects = []\n        self.bullets = []\n        self.enemies = []",
         "detail": "game",
         "documentation": {}
     },

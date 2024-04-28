@@ -2,8 +2,10 @@ import random
 import animation
 from enum import Enum
 from map.trap_block import TrapBlock
+from game_element import Character, Weapon, Item, IDLE_CHARACTER_LIST, ITEM_LIST, WEAPON_LIST
+from animation._helper import UNIT
 from .block import Block
-from .helper import MAP_WIDTH, MAP_HEIGHT
+from .helper import MAP_WIDTH, MAP_HEIGHT, MAX_IDLE_CHARACTERS_NUM, MAX_ITEMS_NUM, MAX_WEAPONS_NUM
 
 class TileType(Enum):
     FLOOR = 0
@@ -13,7 +15,10 @@ class TileType(Enum):
 class Map():
     def __init__(self):
         self.__tuple, self.has_map, self.is_trap, self.__animated_block_positions = self.create_map()
-
+        self.idle_characters_map, self.idle_characters_positions = self.__generate_idle_characters(MAX_IDLE_CHARACTERS_NUM, MAP_WIDTH, MAP_HEIGHT)
+        self.items_map, self.items_positions = self.__generate_items(MAX_ITEMS_NUM, MAP_WIDTH, MAP_HEIGHT)
+        self.weapons_map, self.weapons_positions = self.__generate_weapons(MAX_WEAPONS_NUM, MAP_WIDTH, MAP_HEIGHT)
+   
     def __getitem__(self, index: int):
         return self.__tuple[index]
 
@@ -210,5 +215,95 @@ class Map():
                             if not has_map[j - 1][i - 1]:
                                 map[j - 1][i].append(Block("wall_side_mid_right", (i * 32, (j - 1) * 32)))
                                 map[j - 2][i].append(Block("wall_side_top_right", (i * 32, (j - 2) * 32)))
+    
+    # def __generate_idle_characters(self, max_characters_num, map_width, map_height, has_map):
+    #     temp = tuple((i, j) for i in range(map_width) for j in range(map_height))
+    #     temp = random.sample(temp, max_characters_num)
+    #     idle_characters_map = []
+    #     for i, j in temp:
+    #         t = random.choice(['knight_m', 'wizzard_m', 'lizard_m', 'elf_m'])
+    #         if has_map[j][i]:
+    #             idle_characters_map.append(Character(t, (i, j)))
+    #     return idle_characters_map
+
+    def __generate_idle_characters(self, max_characters_num, map_width, map_height):
+        idle_characters_map = [[None for i in range(map_width)] for j in range(map_height)]
+        idle_characters_positions = []
+        self.__add_new_idle_characters(idle_characters_map, idle_characters_positions, max_characters_num, map_width, map_height)
+        return idle_characters_map, idle_characters_positions
         
-        
+    def __add_new_idle_characters(self, idle_characters_map, idle_characters_positions, max_characters_num, map_width, map_height):
+        if (max_characters_num <= 0):
+            return
+        temp = [[i, j] for i in range(map_width) for j in range(map_height)]
+        temp = random.sample(temp, max_characters_num)
+        for i, j in temp:
+            if (self.has_map[j][i]) and (idle_characters_map[j][i] is None):
+                t = random.choice(IDLE_CHARACTER_LIST)
+                idle_characters_map[j][i] = Character(t, (i * UNIT, j * UNIT))
+                idle_characters_map[j][i].set_center((i * UNIT + UNIT // 2, j * UNIT + UNIT // 2))
+                idle_characters_positions.append((i, j))
+
+    def remove_idle_character(self, x, y):
+        if not (self.idle_characters_map[y][x] is None):
+            self.idle_characters_map[y][x] = None
+            self.idle_characters_positions.remove((x, y))
+
+    def add_new_idle_characters(self):
+        max_idle_characters_num = MAX_IDLE_CHARACTERS_NUM - len(self.idle_characters_positions)
+        self.__add_new_idle_characters(self.idle_characters_map, self.idle_characters_positions, max_idle_characters_num, MAP_WIDTH, MAP_HEIGHT)
+
+    def __generate_items(self, max_items_num, map_width, map_height):
+        items_map = [[None for i in range(map_width)] for j in range(map_height)]
+        items_positions = []
+        self.__add_new_items(items_map, items_positions, max_items_num, map_width, map_height)
+        return items_map, items_positions
+    
+    def __add_new_items(self, items_map, items_positions, max_items_num, map_width, map_height):
+        if (max_items_num <= 0):
+            return
+        temp = [[i, j] for i in range(map_width) for j in range(map_height)]
+        temp = random.sample(temp, max_items_num)
+        for i, j in temp:
+            if (self.has_map[j][i]) and (items_map[j][i] is None):
+                t = random.choice(ITEM_LIST)
+                items_map[j][i] = Item(t, (i * UNIT, j * UNIT))
+                items_map[j][i].set_center((i * UNIT + UNIT // 2, j * UNIT + UNIT // 2))
+                items_positions.append((i, j))
+       
+
+    def add_new_items(self):
+        max_items_num = MAX_ITEMS_NUM - len(self.items_positions)
+        self.__add_new_items(self.items_map, self.items_positions, max_items_num, MAP_WIDTH, MAP_HEIGHT)
+
+    def remove_item(self, x, y):
+        if not (self.items_map[y][x] is None):
+            self.items_map[y][x] = None
+            self.items_positions.remove((x, y))
+
+    def __generate_weapons(self, max_weapons_num, map_width, map_height):
+        weapons_map = [[None for i in range(map_width)] for j in range(map_height)]
+        weapons_positions = []
+        self.__add_new_weapons(weapons_map, weapons_positions, max_weapons_num, map_width, map_height)
+        return weapons_map, weapons_positions
+    
+    def __add_new_weapons(self, weapons_map, weapons_positions, max_weapons_num, map_width, map_height):
+        if (max_weapons_num <= 0):
+            return
+        temp = [[i, j] for i in range(map_width) for j in range(map_height)]
+        temp = random.sample(temp, max_weapons_num)
+        for i, j in temp:
+            if (self.has_map[j][i]) and (weapons_map[j][i] is None):
+                t = random.choice(WEAPON_LIST)
+                weapons_map[j][i] = Weapon(t, (i * UNIT, j * UNIT))
+                weapons_map[j][i].set_center((i * UNIT + UNIT // 2, j * UNIT + UNIT // 2))
+                weapons_positions.append((i, j))
+            
+    def add_new_weapons(self):
+        max_weapons_num = MAX_WEAPONS_NUM - len(self.weapons_positions)
+        self.__add_new_weapons(self.weapons_map, self.weapons_positions, max_weapons_num, MAP_WIDTH, MAP_HEIGHT)
+    
+    def remove_weapon(self, x, y):
+        if not (self.weapons_map[y][x] is None):
+            self.weapons_map[y][x] = None
+            self.weapons_positions.remove((x, y))

@@ -1,14 +1,28 @@
 import pygame
 import animation
+from animation._helper import UNIT
 from .character import Character
+from .item import Item
+from .data import DATA
+
 
 class Snake():
-    def __init__(self, speed = 2):
-        self.__list = [Character('knight_m', (500, 500)), Character('knight_m', (532, 500)),
-                       Character('knight_m', (564, 500)), Character('knight_m', (596, 500))]
+    def __init__(self, name : str, position : tuple[int, int], direction, speed = 2):
+        """
+        'knight_m', 'wizzard_m', 'lizard_m', 'elf_m','big_demon', 'ogre', 'big_zombie', 'chort', 'wogol', 'necromancer', 'orc_shaman', 'orc_warrior', 'masked_orc', 'ice_zombie', 'zombie'
+        """
+        self.__distance_between_characters = UNIT # + self.speed
+        self.__list = self.__init_snake(name, position, direction)
         self.speed = speed
-        self.distance_between_characters = 32 + self.speed
         self.__live = True
+
+    def __init_snake(self, name, position, direction):
+        snake = []
+        for i in range(DATA.get_snaker(name)['length']):
+            character = Character(name, position, direction)
+            character.move(-i * self.__distance_between_characters)
+            snake.append(character)
+        return snake
 
     def __getitem__(self, index: int):
         return self.__list[index]
@@ -16,27 +30,17 @@ class Snake():
     def add_character(self, name, position):
         pass
 
+    def add_item(self, Item):
+        pass
+
     def die(self):
         self.__live = False
 
     def add_character(self, character : Character):
+        character.change_direction(self.__list[0].get_direction())
+        character.set_position(self.__list[0].get_position())
+        character.move(self.__distance_between_characters)
         self.__list = [character] + self.__list
-        if self.__list[1].get_direction() == "left":
-            self.__list[0].change_direction("left")
-            self.__list[0].set_position((self.__list[1].get_position()[0] - self.distance_between_characters, 
-                                          self.__list[1].get_position()[1]))
-        elif self.__list[1].get_direction() == "right":
-            self.__list[0].change_direction("right")
-            self.__list[0].set_position((self.__list[1].get_position()[0] + self.distance_between_characters, 
-                                          self.__list[1].get_position()[1]))
-        elif self.__list[1].get_direction() == "up":
-            self.__list[0].change_direction("up")
-            self.__list[0].set_position((self.__list[1].get_position()[0], 
-                                          self.__list[1].get_position()[1] - self.distance_between_characters))
-        elif self.__list[1].get_direction() == "down":
-            self.__list[0].change_direction("down")
-            self.__list[0].set_position((self.__list[1].get_position()[0], 
-                                          self.__list[1].get_position()[1] + self.distance_between_characters))
 
     def update(self, current_time):
         self.remove_character_die()
@@ -73,21 +77,6 @@ class Snake():
                 self.__list[0].change_direction("down")
     
     def move(self):
-    #     for i in range(1, len(self.__list)):
-    #         dx = self.__list[i - 1].get_position()[0] - self.__list[i].get_position()[0]
-    #         dy = self.__list[i - 1].get_position()[1] - self.__list[i].get_position()[1]
-    #         if (self.__list[i - 1].get_direction() in ("left", "right")):
-    #             if (dy > 0):
-    #                 self.__list[i].change_direction("down")
-    #             elif (dy < 0):
-    #                 self.__list[i].change_direction("up")
-
-    #         elif (self.__list[i - 1].get_direction() in ("up", "down")):
-    #             if (dx > 0):
-    #                 self.__list[i].change_direction("right")
-    #             elif (dx < 0):
-    #                 self.__list[i].change_direction("left")
-                
         for i in range(len(self.__list) - 1, 0, -1):
             dx = self.__list[i - 1].get_position()[0] - self.__list[i].get_position()[0]
             dy = self.__list[i - 1].get_position()[1] - self.__list[i].get_position()[1]
@@ -142,71 +131,8 @@ class Snake():
                             self.__list[i].change_direction("left")
 
         for charactor in self.__list:
-            if charactor.get_direction() == "left":
-                charactor.move(-self.speed, 0)
-            elif charactor.get_direction() == "right":
-                charactor.move(self.speed, 0)
-            elif charactor.get_direction() == "up":
-                charactor.move(0, -self.speed)
-            elif charactor.get_direction() == "down":
-                charactor.move(0, self.speed)
+            charactor.move(self.speed)
 
-
-        # for i in range(len(self.__list) - 1, 0, -1):
-        #     dx = self.__list[i - 1].get_position()[0] - self.__list[i].get_position()[0]
-        #     dy = self.__list[i - 1].get_position()[1] - self.__list[i].get_position()[1]
-        #     d = abs(dx) + abs(dy) - self.distance_between_characters
-        #     if (self.__list[i].get_direction() == "left"):
-        #         self.__list[i].move(-(self.speed + d), 0)
-        #     elif (self.__list[i].get_direction() == "right"):
-        #         self.__list[i].move(self.speed + d, 0)
-        #     elif (self.__list[i].get_direction() == "up"):
-        #         self.__list[i].move(0, -(self.speed + d))
-        #     elif (self.__list[i].get_direction() == "down"):
-        #         self.__list[i].move(0, self.speed + d)
-        
-        # if self.__list[0].get_direction() == "left":
-        #     self.__list[0].move(-self.speed, 0)
-        # elif self.__list[0].get_direction() == "right":
-        #     self.__list[0].move(self.speed, 0)
-        # elif self.__list[0].get_direction() == "up":
-        #     self.__list[0].move(0, -self.speed)
-        # elif self.__list[0].get_direction() == "down":
-        #     self.__list[0].move(0, self.speed)
- 
-
-        
-    
-
-
-
-# for i in range(len(self.__list) - 1, 0, -1):
-#             dx = self.__list[i - 1].get_position()[0] - self.__list[i].get_position()[0]
-#             dy = self.__list[i - 1].get_position()[1] - self.__list[i].get_position()[1]
-#             if (self.__list[i].get_direction() == "left"):
-#                 if (dx >= 0):                
-#                     if (dy > 0):
-#                         self.__list[i].change_direction("down")
-#                     elif (dy < 0):
-#                         self.__list[i].change_direction("up")
-#             elif (self.__list[i].get_direction() == "right"):
-#                 if (dx <= 0):
-#                     if (dy > 0):
-#                         self.__list[i].change_direction("down")
-#                     elif (dy < 0):
-#                         self.__list[i].change_direction("up")
-#             elif (self.__list[i].get_direction() == "up"):
-#                 if (dy >= 0):
-#                     if (dx > 0):
-#                         self.__list[i].change_direction("right")
-#                     elif (dx < 0):
-#                         self.__list[i].change_direction("left")
-#             elif (self.__list[i].get_direction() == "down"):
-#                 if (dy <= 0):
-#                     if (dx > 0):
-#                         self.__list[i].change_direction("right")
-#                     elif (dx < 0):
-#                         self.__list[i].change_direction("left")
 
     
 
